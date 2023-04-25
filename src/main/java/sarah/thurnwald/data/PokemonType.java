@@ -59,8 +59,7 @@ public enum PokemonType {
             case DARK -> new PokemonType[]{PSYCHIC};
             case STEEL -> new PokemonType[]{POISON};
             case FAIRY -> new PokemonType[]{DRAGON};
-            case FIRE, WATER, GRASS, ELECTRIC, ICE, FIGHTING, POISON, PSYCHIC, BUG, ROCK, DRAGON ->
-                    new PokemonType[]{};
+            case FIRE, WATER, GRASS, ELECTRIC, ICE, FIGHTING, POISON, PSYCHIC, BUG, ROCK, DRAGON -> new PokemonType[]{};
         };
     }
 
