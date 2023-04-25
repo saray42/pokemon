@@ -1,7 +1,5 @@
 package sarah.thurnwald.data;
 
-import sarah.thurnwald.logic.LevelCalulator;
-
 import java.util.Arrays;
 import java.util.List;
 

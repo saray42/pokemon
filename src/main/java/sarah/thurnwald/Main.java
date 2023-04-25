@@ -1,18 +1,14 @@
 package sarah.thurnwald;
 
-import sarah.thurnwald.data.Attack;
-import sarah.thurnwald.data.ExpType;
-import sarah.thurnwald.data.Pokemon;
-import sarah.thurnwald.data.PokemonTypes;
-import sarah.thurnwald.logic.LevelCalulator;
+import sarah.thurnwald.data.*;
+import sarah.thurnwald.logic.LevelCalculator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        LevelCalulator levelCalulator = new LevelCalulator();
+        LevelCalculator levelCalulator = new LevelCalculator();
         Pokemon gengar = new Pokemon(
                 "Gengar",
                 "Gengar",
@@ -21,8 +17,8 @@ public class Main {
                 levelCalulator.calculateLevel(ExpType.MEDIUMSLOW, 70),
                 levelCalulator.calculateLevel(ExpType.MEDIUMSLOW, 71),
                 60,
-                31,
-                252,
+                0,
+                0,
                 65,
                 0,
                 0,
@@ -38,7 +34,12 @@ public class Main {
                 110,
                 0,
                 0,
-                new ArrayList<>(List.of(new Attack("Dark Pulse", 80, PokemonTypes.DARK), new Attack("Shadow Ball", 80, PokemonTypes.GHOST))),
+                new ArrayList<>(
+                        List.of(
+                                new Attack("Dark Pulse", 80, PokemonTypes.DARK, AttackCategory.SPECIAL),
+                                new Attack("Shadow Ball", 80, PokemonTypes.GHOST, AttackCategory.SPECIAL)
+                        )
+                ),
                 new PokemonTypes[]{PokemonTypes.GHOST, PokemonTypes.POISON});
 
         System.out.println(gengar);

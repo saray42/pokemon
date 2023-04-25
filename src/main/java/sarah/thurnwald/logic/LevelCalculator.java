@@ -2,7 +2,7 @@ package sarah.thurnwald.logic;
 
 import sarah.thurnwald.data.ExpType;
 
-public class LevelCalulator {
+public class LevelCalculator {
 
     public int calculateLevel(ExpType expType, int level) {
         return switch (expType) {
@@ -49,11 +49,11 @@ public class LevelCalulator {
 
     private int calculateFluctuating(int level) {
         if (level <= 15) {
-            return (int) Math.floor(Math.pow(level, 3) * ((24 + ((double) (level + 1) / 3)) / 50));
+            return (int) Math.floor(Math.pow(level, 3) * ((double) (24 + ((level + 1) / 3)) / 50));
         } else if (level <= 36) {
-            return (int) Math.floor(Math.pow(level, 3) * ((double) (14 * level) / 50));
+            return (int) Math.floor(Math.pow(level, 3) * ((double) (14 + level) / 50));
         } else {
-            return (int) Math.floor(Math.pow(level, 3) * ((32 + ((double) level / 2)) / 50));
+            return (int) Math.floor(Math.pow(level, 3) * ((double) (32 + (level / 2)) / 50));
         }
     }
 }

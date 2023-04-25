@@ -7,10 +7,13 @@ public class Attack {
 
     private PokemonTypes attackType;
 
-    public Attack(String attackName, int attackDamage, PokemonTypes attackType) {
+    private AttackCategory attackCategory;
+
+    public Attack(String attackName, int attackDamage, PokemonTypes attackType, AttackCategory attackCategory) {
         this.attackName = attackName;
         this.attackDamage = attackDamage;
         this.attackType = attackType;
+        this.attackCategory = attackCategory;
     }
 
     public String getAttackName() {
@@ -35,5 +38,22 @@ public class Attack {
 
     public void setAttackType(PokemonTypes attackType) {
         this.attackType = attackType;
+    }
+
+    public AttackCategory getAttackCategory() {
+        return attackCategory;
+    }
+
+    public void setAttackCategory(AttackCategory attackCategory) {
+        this.attackCategory = attackCategory;
+    }
+
+    @Override
+    public String toString() {
+        return "Attack{" +
+                "attackName='" + attackName + '\'' +
+                ", attackDamage=" + attackDamage +
+                ", attackType=" + attackType +
+                '}';
     }
 }
