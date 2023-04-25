@@ -1,6 +1,10 @@
 package sarah.thurnwald.data;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Player {
     private final String name;
@@ -9,7 +13,7 @@ public class Player {
 
     private final Bag bag;
 
-    private List<Pokemon> party;
+    private final HashMap<String, Pokemon> party;
 
     private int money;
 
@@ -17,7 +21,7 @@ public class Player {
         this.name = name;
         this.id = id;
         this.bag = bag;
-        this.party = party;
+        this.party = (HashMap<String, Pokemon>) party.stream().collect(Collectors.toMap(Pokemon::getId, Function.identity()));
         this.money = money;
     }
 
@@ -33,24 +37,28 @@ public class Player {
         return bag;
     }
 
-    public List<Pokemon> getParty() {
+    public HashMap<String, Pokemon> getParty() {
         return party;
     }
 
     public void addPokemonToParty(Pokemon pokemon) {
-        if (party.size() < 6) this.party.add(pokemon);
+        if (party.size() < 6) this.party.put(pokemon.getId(), pokemon);
     }
 
     public void removePokemonFromParty(Pokemon pokemon) {
-        if (party.size() > 1) this.party.remove(pokemon);
+        if (party.size() > 1) this.party.remove(pokemon.getId(), pokemon);
     }
 
     public int getMoney() {
         return money;
     }
 
-    public void setMoney(int money) {
-        this.money = money;
+    public void addMoney(int moneyToAdd) {
+        this.money += moneyToAdd;
+    }
+
+    public void removeMoney(int moneyToRemove) {
+        this.money -= moneyToRemove;
     }
 
     @Override

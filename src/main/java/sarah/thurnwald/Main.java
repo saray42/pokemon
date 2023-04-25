@@ -3,9 +3,7 @@ package sarah.thurnwald;
 import sarah.thurnwald.data.*;
 import sarah.thurnwald.logic.LevelCalculator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -96,13 +94,11 @@ public class Main {
                 )
         );
 
-        Player lily = new Player("Lily", UUID.randomUUID().toString(), new Bag(), new ArrayList<>(List.of(gengar1)), 100_000);
-
-        lily.addPokemonToParty(gengar2);
+        Player lily = new Player("Lily", UUID.randomUUID().toString(), new Bag(), new ArrayList<>(List.of(gengar1, gengar2)), 100_000);
 
         System.out.println(lily);
 
-        lily.removePokemonFromParty(gengar1);
+        lily.removePokemonFromParty(gengar2);
 
         System.out.println(lily);
     }

@@ -3,12 +3,15 @@ package sarah.thurnwald.data;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class Pokemon {
 
     private String name;
 
     private String customName;
+
+    private final String id = UUID.randomUUID().toString();
 
     private int level;
 
@@ -446,5 +449,9 @@ public class Pokemon {
                 ", attacks=" + attacks +
                 ", pokemonTypes=" + pokemonTypes +
                 '}';
+    }
+
+    public String getId() {
+        return id;
     }
 }
