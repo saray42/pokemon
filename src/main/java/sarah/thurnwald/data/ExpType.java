@@ -3,8 +3,8 @@ package sarah.thurnwald.data;
 public enum ExpType {
     ERRATIC,
     FAST,
-    MEDIUMFAST,
-    MEDIUMSLOW,
+    MEDIUM_FAST,
+    MEDIUM_SLOW,
     SLOW,
     FLUCTUATING;
 

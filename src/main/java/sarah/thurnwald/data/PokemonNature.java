@@ -29,9 +29,9 @@ public enum PokemonNature {
     CAREFUL("SpecialDefense", "SpecialAttack"),
     QUIRKY("", "");
 
-    private String increaseStat;
+    private final String increaseStat;
 
-    private String decreaseStat;
+    private final String decreaseStat;
 
     PokemonNature(String increaseStat, String decreaseStat) {
         this.increaseStat = increaseStat;

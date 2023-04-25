@@ -13,11 +13,11 @@ public class Main {
                 "Gengar",
                 "Gengar",
                 70,
-                ExpType.MEDIUMSLOW,
-                levelCalculator.calculateLevel(ExpType.MEDIUMSLOW, 70),
-                levelCalculator.calculateLevel(ExpType.MEDIUMSLOW, 71),
+                ExpType.MEDIUM_SLOW,
+                levelCalculator.calculateLevel(ExpType.MEDIUM_SLOW, 70),
+                levelCalculator.calculateLevel(ExpType.MEDIUM_SLOW, 71),
                 PokemonGender.FEMALE,
-                PokemonNature.RASH,
+                PokemonNature.MILD,
                 60,
                 0,
                 0,
@@ -38,13 +38,13 @@ public class Main {
                 0,
                 new ArrayList<>(
                         List.of(
-                                new Attack("Dark Pulse", 80, PokemonTypes.DARK, AttackCategory.SPECIAL, 15, 100),
-                                new Attack("Shadow Ball", 80, PokemonTypes.GHOST, AttackCategory.SPECIAL, 15, 100),
-                                new Attack("Shadow Punch", 60, PokemonTypes.GHOST, AttackCategory.PHYSICAL, 20, Integer.MAX_VALUE / 2),
-                                new Attack("Shadow Claw", 70, PokemonTypes.GHOST, AttackCategory.PHYSICAL, 15, 100)
+                                new Attack("Dark Pulse", 80, PokemonType.DARK, AttackCategory.SPECIAL, 15, 100),
+                                new Attack("Shadow Ball", 80, PokemonType.GHOST, AttackCategory.SPECIAL, 15, 100),
+                                new Attack("Shadow Punch", 60, PokemonType.GHOST, AttackCategory.PHYSICAL, 20, Integer.MAX_VALUE / 2),
+                                new Attack("Shadow Claw", 70, PokemonType.GHOST, AttackCategory.PHYSICAL, 15, 100)
                         )
                 ),
-                new PokemonTypes[]{PokemonTypes.GHOST, PokemonTypes.POISON});
+                new PokemonType[]{PokemonType.GHOST, PokemonType.POISON});
 
         System.out.println(gengar);
     }

@@ -21,12 +21,12 @@ class CalculateLevelTest {
 
     @Test
     void calculateLevelMediumfast() {
-        assertEquals(1_000_000, levelCalulator.calculateLevel(ExpType.MEDIUMFAST, 100));
+        assertEquals(1_000_000, levelCalulator.calculateLevel(ExpType.MEDIUM_FAST, 100));
     }
 
     @Test
     void calculateLevelMediumslow() {
-        assertEquals(1_059_860, levelCalulator.calculateLevel(ExpType.MEDIUMSLOW, 100));
+        assertEquals(1_059_860, levelCalulator.calculateLevel(ExpType.MEDIUM_SLOW, 100));
     }
 
     @Test

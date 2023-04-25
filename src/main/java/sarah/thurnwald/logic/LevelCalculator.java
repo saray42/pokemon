@@ -8,8 +8,8 @@ public class LevelCalculator {
         return switch (expType) {
             case ERRATIC -> calculateErratic(level);
             case FAST -> calculateFast(level);
-            case MEDIUMFAST -> calculateMediumFast(level);
-            case MEDIUMSLOW -> calculateMediumSlow(level);
+            case MEDIUM_FAST -> calculateMediumFast(level);
+            case MEDIUM_SLOW -> calculateMediumSlow(level);
             case SLOW -> calculateSlow(level);
             case FLUCTUATING -> calculateFluctuating(level);
         };

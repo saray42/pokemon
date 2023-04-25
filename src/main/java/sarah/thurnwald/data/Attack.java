@@ -5,7 +5,7 @@ public class Attack {
 
     private int attackDamage;
 
-    private PokemonTypes attackType;
+    private PokemonType attackType;
 
     private AttackCategory attackCategory;
 
@@ -15,7 +15,7 @@ public class Attack {
 
     private int accuracy;
 
-    public Attack(String attackName, int attackDamage, PokemonTypes attackType, AttackCategory attackCategory, int usages, int accuracy) {
+    public Attack(String attackName, int attackDamage, PokemonType attackType, AttackCategory attackCategory, int usages, int accuracy) {
         this.attackName = attackName;
         this.attackDamage = attackDamage;
         this.attackType = attackType;
@@ -41,11 +41,11 @@ public class Attack {
         this.attackDamage = attackDamage;
     }
 
-    public PokemonTypes getAttackType() {
+    public PokemonType getAttackType() {
         return attackType;
     }
 
-    public void setAttackType(PokemonTypes attackType) {
+    public void setAttackType(PokemonType attackType) {
         this.attackType = attackType;
     }
 
