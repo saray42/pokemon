@@ -16,6 +16,7 @@ public class Main {
                 ExpType.MEDIUM_SLOW,
                 levelCalculator.calculateLevel(ExpType.MEDIUM_SLOW, 70),
                 levelCalculator.calculateLevel(ExpType.MEDIUM_SLOW, 71),
+                250,
                 PokemonGender.FEMALE,
                 PokemonNature.MILD,
                 60,

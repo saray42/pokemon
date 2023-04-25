@@ -7,35 +7,45 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CalculateLevelTest {
 
-    LevelCalculator levelCalulator = new LevelCalculator();
+    LevelCalculator levelCalculator = new LevelCalculator();
 
     @Test
     void calculateLevelErratic() {
-        assertEquals(600_000, levelCalulator.calculateLevel(ExpType.ERRATIC, 100));
+        assertEquals(600_000, levelCalculator.calculateLevel(ExpType.ERRATIC, 100));
     }
 
     @Test
     void calculateLevelFast() {
-        assertEquals(800_000, levelCalulator.calculateLevel(ExpType.FAST, 100));
+        assertEquals(800_000, levelCalculator.calculateLevel(ExpType.FAST, 100));
     }
 
     @Test
-    void calculateLevelMediumfast() {
-        assertEquals(1_000_000, levelCalulator.calculateLevel(ExpType.MEDIUM_FAST, 100));
+    void calculateLevelMediumFast() {
+        assertEquals(1_000_000, levelCalculator.calculateLevel(ExpType.MEDIUM_FAST, 100));
     }
 
     @Test
-    void calculateLevelMediumslow() {
-        assertEquals(1_059_860, levelCalulator.calculateLevel(ExpType.MEDIUM_SLOW, 100));
+    void calculateLevelMediumSlow() {
+        assertEquals(1_059_860, levelCalculator.calculateLevel(ExpType.MEDIUM_SLOW, 100));
     }
 
     @Test
     void calculateLevelSlow() {
-        assertEquals(1_250_000, levelCalulator.calculateLevel(ExpType.SLOW, 100));
+        assertEquals(1_250_000, levelCalculator.calculateLevel(ExpType.SLOW, 100));
     }
 
     @Test
     void calculateLevelFluctuating() {
-        assertEquals(1_640_000, levelCalulator.calculateLevel(ExpType.FLUCTUATING, 100));
+        assertEquals(1_640_000, levelCalculator.calculateLevel(ExpType.FLUCTUATING, 100));
+    }
+
+    @Test
+    void calculateLevelFluctuatingLvl2() {
+        assertEquals(4, levelCalculator.calculateLevel(ExpType.FLUCTUATING, 2));
+    }
+
+    @Test
+    void calculateLevelErraticLvl2() {
+        assertEquals(15, levelCalculator.calculateLevel(ExpType.ERRATIC, 2));
     }
 }
