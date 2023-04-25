@@ -20,6 +20,8 @@ public class Pokemon {
 
     private PokemonGender gender;
 
+    private PokemonNature nature;
+
     private int maxHealthStat;
 
     private int currentHealthStat;
@@ -72,7 +74,7 @@ public class Pokemon {
 
     private final PokemonTypes[] pokemonTypes;
 
-    public Pokemon(String name, String customName, int level, ExpType expType, int currentExp, int expForNextLevel, PokemonGender gender, int healthStat, int healthStatIv, int healthStatEv, int attackStat, int attackStatIv, int attackStatEv, int defenseStat, int defenseStatIv, int defenseStatEv, int specialAttackStat, int specialAttackStatIv, int specialAttackStatEv, int specialDefenseStat, int specialDefenseStatIv, int specialDefenseStatEv, int speedStat, int speedStatIv, int speedStatEv, List<Attack> attacks, PokemonTypes[] pokemonTypes) {
+    public Pokemon(String name, String customName, int level, ExpType expType, int currentExp, int expForNextLevel, PokemonGender gender, PokemonNature nature, int healthStat, int healthStatIv, int healthStatEv, int attackStat, int attackStatIv, int attackStatEv, int defenseStat, int defenseStatIv, int defenseStatEv, int specialAttackStat, int specialAttackStatIv, int specialAttackStatEv, int specialDefenseStat, int specialDefenseStatIv, int specialDefenseStatEv, int speedStat, int speedStatIv, int speedStatEv, List<Attack> attacks, PokemonTypes[] pokemonTypes) {
         int healthStatFormula = ((2 * healthStat + healthStatIv + healthStatEv / 4 + 100) * level) / 100 + 10;
         int calculatedAttackStat = calculateStat(attackStat, attackStatIv, attackStatEv, level);
         int calculatedDefenseStat = calculateStat(defenseStat, defenseStatIv, defenseStatEv, level);
@@ -87,6 +89,7 @@ public class Pokemon {
         this.currentExp = currentExp;
         this.expForNextLevel = expForNextLevel;
         this.gender = gender;
+        this.nature = nature;
         this.maxHealthStat = healthStatFormula;
         this.currentHealthStat = healthStatFormula;
         this.healthStatIv = healthStatIv;
@@ -169,6 +172,14 @@ public class Pokemon {
 
     public void setGender(PokemonGender gender) {
         this.gender = gender;
+    }
+
+    public PokemonNature getNature() {
+        return nature;
+    }
+
+    public void setNature(PokemonNature nature) {
+        this.nature = nature;
     }
 
     public int getMaxHealthStat() {
@@ -385,6 +396,7 @@ public class Pokemon {
                 ", currentExp=" + currentExp +
                 ", expForNextLevel=" + expForNextLevel +
                 ", gender=" + gender +
+                ", nature=" + nature +
                 ", maxHealthStat=" + maxHealthStat +
                 ", currentHealthStat=" + currentHealthStat +
                 ", healthStatIv=" + healthStatIv +

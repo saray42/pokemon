@@ -17,6 +17,7 @@ public class Main {
                 levelCalculator.calculateLevel(ExpType.MEDIUMSLOW, 70),
                 levelCalculator.calculateLevel(ExpType.MEDIUMSLOW, 71),
                 PokemonGender.FEMALE,
+                PokemonNature.RASH,
                 60,
                 0,
                 0,
