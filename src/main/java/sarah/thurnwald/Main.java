@@ -8,9 +8,12 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         LevelCalculator levelCalculator = new LevelCalculator();
+        Scanner scanner = new Scanner(System.in);
+
         Pokemon gengar1 = new Pokemon(
                 "Gengar",
                 "Gengar",
+                PokemonOwnership.PLAYER_POKEMON,
                 70,
                 ExpType.MEDIUM_SLOW,
                 levelCalculator.calculateLevel(ExpType.MEDIUM_SLOW, 70),
@@ -54,6 +57,7 @@ public class Main {
         Pokemon gengar2 = new Pokemon(
                 "Gengar",
                 "Gengar",
+                PokemonOwnership.PLAYER_POKEMON,
                 60,
                 ExpType.MEDIUM_SLOW,
                 levelCalculator.calculateLevel(ExpType.MEDIUM_SLOW, 60),

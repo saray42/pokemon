@@ -17,6 +17,7 @@ class ExpCalculatorTest {
     Pokemon gengar1 = new Pokemon(
             "Gengar",
             "Gengar",
+            PokemonOwnership.PLAYER_POKEMON,
             60,
             ExpType.MEDIUM_SLOW,
             levelCalculator.calculateLevel(ExpType.MEDIUM_SLOW, 70),
@@ -60,6 +61,7 @@ class ExpCalculatorTest {
     Pokemon gengar2 = new Pokemon(
             "Gengar",
             "Gengar",
+            PokemonOwnership.PLAYER_POKEMON,
             70,
             ExpType.MEDIUM_SLOW,
             levelCalculator.calculateLevel(ExpType.MEDIUM_SLOW, 60),

@@ -11,6 +11,8 @@ public class Pokemon {
 
     private String customName;
 
+    private PokemonOwnership ownership;
+
     private final String id = UUID.randomUUID().toString();
 
     private int level;
@@ -79,7 +81,7 @@ public class Pokemon {
 
     private List<PokemonType> pokemonTypes = new ArrayList<PokemonType>(2);
 
-    public Pokemon(String name, String customName, int level, ExpType expType, int currentExp, int expForNextLevel, int basicExp, PokemonGender gender, PokemonNature nature, int healthStat, int healthStatIv, int healthStatEv, int attackStat, int attackStatIv, int attackStatEv, int defenseStat, int defenseStatIv, int defenseStatEv, int specialAttackStat, int specialAttackStatIv, int specialAttackStatEv, int specialDefenseStat, int specialDefenseStatIv, int specialDefenseStatEv, int speedStat, int speedStatIv, int speedStatEv, List<Attack> attacks, List<PokemonType> pokemonTypes) {
+    public Pokemon(String name, String customName, PokemonOwnership ownership, int level, ExpType expType, int currentExp, int expForNextLevel, int basicExp, PokemonGender gender, PokemonNature nature, int healthStat, int healthStatIv, int healthStatEv, int attackStat, int attackStatIv, int attackStatEv, int defenseStat, int defenseStatIv, int defenseStatEv, int specialAttackStat, int specialAttackStatIv, int specialAttackStatEv, int specialDefenseStat, int specialDefenseStatIv, int specialDefenseStatEv, int speedStat, int speedStatIv, int speedStatEv, List<Attack> attacks, List<PokemonType> pokemonTypes) {
         int healthStatFormula = ((2 * healthStat + healthStatIv + healthStatEv / 4 + 100) * level) / 100 + 10;
         int calculatedAttackStat = calculateStat("Attack", attackStat, attackStatIv, attackStatEv, level, nature);
         int calculatedDefenseStat = calculateStat("Defense", defenseStat, defenseStatIv, defenseStatEv, level, nature);
@@ -89,6 +91,7 @@ public class Pokemon {
 
         this.name = name;
         this.customName = customName;
+        this.ownership = ownership;
         this.level = level;
         this.expType = expType;
         this.currentExp = currentExp;
@@ -148,6 +151,18 @@ public class Pokemon {
 
     public void setCustomName(String customName) {
         this.customName = customName;
+    }
+
+    public PokemonOwnership getOwnership() {
+        return ownership;
+    }
+
+    public void setOwnership(PokemonOwnership ownership) {
+        this.ownership = ownership;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public int getLevel() {
@@ -415,6 +430,8 @@ public class Pokemon {
         return "Pokemon{" +
                 "name='" + name + '\'' +
                 ", customName='" + customName + '\'' +
+                ", ownership=" + ownership +
+                ", id='" + id + '\'' +
                 ", level=" + level +
                 ", expType=" + expType +
                 ", currentExp=" + currentExp +
@@ -449,9 +466,5 @@ public class Pokemon {
                 ", attacks=" + attacks +
                 ", pokemonTypes=" + pokemonTypes +
                 '}';
-    }
-
-    public String getId() {
-        return id;
     }
 }
