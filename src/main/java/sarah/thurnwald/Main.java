@@ -100,6 +100,6 @@ public class Main {
 
         lily.removePokemonFromParty(gengar2);
 
-        System.out.println(lily);
+        System.out.println(lily.getParty());
     }
 }

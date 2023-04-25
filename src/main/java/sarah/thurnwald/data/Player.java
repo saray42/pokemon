@@ -1,7 +1,6 @@
 package sarah.thurnwald.data;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -13,7 +12,7 @@ public class Player {
 
     private final Bag bag;
 
-    private final HashMap<String, Pokemon> party;
+    private final LinkedHashMap<String, Pokemon> party;
 
     private int money;
 
@@ -21,7 +20,7 @@ public class Player {
         this.name = name;
         this.id = id;
         this.bag = bag;
-        this.party = (HashMap<String, Pokemon>) party.stream().collect(Collectors.toMap(Pokemon::getId, Function.identity()));
+        this.party = party.stream().collect(Collectors.toMap(Pokemon::getId, Function.identity(), (v1,v2)->v1, LinkedHashMap::new));
         this.money = money;
     }
 
@@ -37,7 +36,7 @@ public class Player {
         return bag;
     }
 
-    public HashMap<String, Pokemon> getParty() {
+    public LinkedHashMap<String, Pokemon> getParty() {
         return party;
     }
 
