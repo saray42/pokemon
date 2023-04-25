@@ -74,9 +74,9 @@ public class Pokemon {
 
     private List<Attack> attacks = new ArrayList<Attack>(4);
 
-    private final PokemonType[] pokemonTypes;
+    private List<PokemonType> pokemonTypes = new ArrayList<PokemonType>(2);
 
-    public Pokemon(String name, String customName, int level, ExpType expType, int currentExp, int expForNextLevel, int basicExp, PokemonGender gender, PokemonNature nature, int healthStat, int healthStatIv, int healthStatEv, int attackStat, int attackStatIv, int attackStatEv, int defenseStat, int defenseStatIv, int defenseStatEv, int specialAttackStat, int specialAttackStatIv, int specialAttackStatEv, int specialDefenseStat, int specialDefenseStatIv, int specialDefenseStatEv, int speedStat, int speedStatIv, int speedStatEv, List<Attack> attacks, PokemonType[] pokemonTypes) {
+    public Pokemon(String name, String customName, int level, ExpType expType, int currentExp, int expForNextLevel, int basicExp, PokemonGender gender, PokemonNature nature, int healthStat, int healthStatIv, int healthStatEv, int attackStat, int attackStatIv, int attackStatEv, int defenseStat, int defenseStatIv, int defenseStatEv, int specialAttackStat, int specialAttackStatIv, int specialAttackStatEv, int specialDefenseStat, int specialDefenseStatIv, int specialDefenseStatEv, int speedStat, int speedStatIv, int speedStatEv, List<Attack> attacks, List<PokemonType> pokemonTypes) {
         int healthStatFormula = ((2 * healthStat + healthStatIv + healthStatEv / 4 + 100) * level) / 100 + 10;
         int calculatedAttackStat = calculateStat("Attack", attackStat, attackStatIv, attackStatEv, level, nature);
         int calculatedDefenseStat = calculateStat("Defense", defenseStat, defenseStatIv, defenseStatEv, level, nature);
@@ -118,7 +118,7 @@ public class Pokemon {
         this.speedStatIv = speedStatIv;
         this.speedStatEv = speedStatEv;
         this.attacks.addAll(attacks);
-        this.pokemonTypes = pokemonTypes;
+        this.pokemonTypes.addAll(pokemonTypes);
     }
 
     private int calculateStat(String statName, int statNumber, int iv, int ev, int level, PokemonNature nature) {
@@ -399,8 +399,12 @@ public class Pokemon {
         this.attacks = attacks;
     }
 
-    public PokemonType[] getPokemonTypes() {
+    public List<PokemonType> getPokemonTypes() {
         return pokemonTypes;
+    }
+
+    public void setPokemonTypes(List<PokemonType> pokemonTypes) {
+        this.pokemonTypes = pokemonTypes;
     }
 
     @Override
@@ -440,7 +444,7 @@ public class Pokemon {
                 ", speedStatIv=" + speedStatIv +
                 ", speedStatEv=" + speedStatEv +
                 ", attacks=" + attacks +
-                ", pokemonTypes=" + Arrays.toString(pokemonTypes) +
+                ", pokemonTypes=" + pokemonTypes +
                 '}';
     }
 }

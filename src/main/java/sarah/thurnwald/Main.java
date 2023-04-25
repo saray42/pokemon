@@ -45,7 +45,12 @@ public class Main {
                                 new Attack("Shadow Claw", 70, PokemonType.GHOST, AttackCategory.PHYSICAL, 15, 100)
                         )
                 ),
-                new PokemonType[]{PokemonType.GHOST, PokemonType.POISON});
+                new ArrayList<>(
+                        List.of(
+                                PokemonType.GHOST, PokemonType.POISON
+                        )
+                )
+        );
 
         System.out.println(gengar);
     }
