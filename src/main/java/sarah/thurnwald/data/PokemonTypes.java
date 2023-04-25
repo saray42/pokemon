@@ -2,41 +2,10 @@ package sarah.thurnwald.data;
 
 public enum PokemonTypes {
 
-    NORMAL("NORMAL"),
-    FIRE("FIRE"),
-    WATER("WATER"),
-    GRASS("GRASS"),
-    ELECTRIC("ELECTRIC"),
-    ICE("ICE"),
-    FIGHTING("FIGHTING"),
-    POISON("POISON"),
-    GROUND("GROUND"),
-    FLYING("FLYING"),
-    PSYCHIC("PSYCHIC"),
-    BUG("BUG"),
-    ROCK("ROCK"),
-    GHOST("GHOST"),
-    DARK("DARK"),
-    DRAGON("DRAGON"),
-    STEEL("STEEL"),
-    FAIRY("FAIRY");
+    NORMAL, FIRE, WATER, GRASS, ELECTRIC, ICE, FIGHTING, POISON, GROUND, FLYING, PSYCHIC, BUG, ROCK, GHOST, DARK, DRAGON, STEEL, FAIRY;
 
-    private final String type;
-
-    PokemonTypes(String type) {
-        this.type = type;
-    }
-
-    public PokemonTypes getPokemonType() {
-        return PokemonTypes.valueOf(type.toUpperCase());
-    }
-
-    public PokemonTypes getAttackType() {
-        return PokemonTypes.valueOf(type.toUpperCase());
-    }
-
-    public PokemonTypes[] getWeaknesses() {
-        return switch (PokemonTypes.valueOf(type.toUpperCase())) {
+    public PokemonTypes[] getWeaknesses(PokemonTypes pokemonType) {
+        return switch (pokemonType) {
             case NORMAL -> new PokemonTypes[]{FIGHTING};
             case FIRE -> new PokemonTypes[]{GROUND, ROCK};
             case WATER -> new PokemonTypes[]{GRASS, ELECTRIC};
@@ -58,8 +27,8 @@ public enum PokemonTypes {
         };
     }
 
-    public PokemonTypes[] getResistances() {
-        return switch (PokemonTypes.valueOf(type.toUpperCase())) {
+    public PokemonTypes[] getResistances(PokemonTypes pokemonType) {
+        return switch (pokemonType) {
             case NORMAL -> new PokemonTypes[]{};
             case FIRE -> new PokemonTypes[]{BUG, STEEL, FIRE, GRASS, ICE};
             case WATER -> new PokemonTypes[]{STEEL, FIRE, WATER, ICE};
@@ -81,8 +50,8 @@ public enum PokemonTypes {
         };
     }
 
-    public PokemonTypes[] getImmunities() {
-        return switch (PokemonTypes.valueOf(type.toUpperCase())) {
+    public PokemonTypes[] getImmunities(PokemonTypes pokemonType) {
+        return switch (pokemonType) {
             case NORMAL -> new PokemonTypes[]{GHOST};
             case GROUND -> new PokemonTypes[]{ELECTRIC};
             case FLYING -> new PokemonTypes[]{GROUND};

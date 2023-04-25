@@ -1,5 +1,6 @@
 package sarah.thurnwald.data;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,11 +12,13 @@ public class Pokemon {
 
     private int level;
 
-    private ExpType expType;
+    private final ExpType expType;
 
     private int currentExp;
 
     private int expForNextLevel;
+
+    private PokemonGender gender;
 
     private int maxHealthStat;
 
@@ -65,11 +68,11 @@ public class Pokemon {
 
     private int speedStatEv;
 
-    private List<Attack> attacks;
+    private List<Attack> attacks = new ArrayList<Attack>(4);
 
     private final PokemonTypes[] pokemonTypes;
 
-    public Pokemon(String name, String customName, int level, ExpType expType, int currentExp, int expForNextLevel, int healthStat, int healthStatIv, int healthStatEv, int attackStat, int attackStatIv, int attackStatEv, int defenseStat, int defenseStatIv, int defenseStatEv, int specialAttackStat, int specialAttackStatIv, int specialAttackStatEv, int specialDefenseStat, int specialDefenseStatIv, int specialDefenseStatEv, int speedStat, int speedStatIv, int speedStatEv, List<Attack> attacks, PokemonTypes[] pokemonTypes) {
+    public Pokemon(String name, String customName, int level, ExpType expType, int currentExp, int expForNextLevel, PokemonGender gender, int healthStat, int healthStatIv, int healthStatEv, int attackStat, int attackStatIv, int attackStatEv, int defenseStat, int defenseStatIv, int defenseStatEv, int specialAttackStat, int specialAttackStatIv, int specialAttackStatEv, int specialDefenseStat, int specialDefenseStatIv, int specialDefenseStatEv, int speedStat, int speedStatIv, int speedStatEv, List<Attack> attacks, PokemonTypes[] pokemonTypes) {
         int healthStatFormula = ((2 * healthStat + healthStatIv + healthStatEv / 4 + 100) * level) / 100 + 10;
         int calculatedAttackStat = calculateStat(attackStat, attackStatIv, attackStatEv, level);
         int calculatedDefenseStat = calculateStat(defenseStat, defenseStatIv, defenseStatEv, level);
@@ -83,6 +86,7 @@ public class Pokemon {
         this.expType = expType;
         this.currentExp = currentExp;
         this.expForNextLevel = expForNextLevel;
+        this.gender = gender;
         this.maxHealthStat = healthStatFormula;
         this.currentHealthStat = healthStatFormula;
         this.healthStatIv = healthStatIv;
@@ -107,12 +111,12 @@ public class Pokemon {
         this.currentSpeedStat = calculatedSpeedStat;
         this.speedStatIv = speedStatIv;
         this.speedStatEv = speedStatEv;
-        this.attacks = attacks;
+        this.attacks.addAll(attacks);
         this.pokemonTypes = pokemonTypes;
     }
 
     private int calculateStat(int stat, int iv, int ev, int level) {
-        return (((2*stat + iv + ev/4) * level) / 100 + 5);
+        return (((2 * stat + iv + ev / 4) * level) / 100 + 5);
     }
 
     public String getName() {
@@ -137,6 +141,34 @@ public class Pokemon {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public ExpType getExpType() {
+        return expType;
+    }
+
+    public int getCurrentExp() {
+        return currentExp;
+    }
+
+    public void setCurrentExp(int currentExp) {
+        this.currentExp = currentExp;
+    }
+
+    public int getExpForNextLevel() {
+        return expForNextLevel;
+    }
+
+    public void setExpForNextLevel(int expForNextLevel) {
+        this.expForNextLevel = expForNextLevel;
+    }
+
+    public PokemonGender getGender() {
+        return gender;
+    }
+
+    public void setGender(PokemonGender gender) {
+        this.gender = gender;
     }
 
     public int getMaxHealthStat() {
@@ -352,6 +384,7 @@ public class Pokemon {
                 ", expType=" + expType +
                 ", currentExp=" + currentExp +
                 ", expForNextLevel=" + expForNextLevel +
+                ", gender=" + gender +
                 ", maxHealthStat=" + maxHealthStat +
                 ", currentHealthStat=" + currentHealthStat +
                 ", healthStatIv=" + healthStatIv +

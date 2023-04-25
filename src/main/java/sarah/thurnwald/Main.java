@@ -8,14 +8,15 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        LevelCalculator levelCalulator = new LevelCalculator();
+        LevelCalculator levelCalculator = new LevelCalculator();
         Pokemon gengar = new Pokemon(
                 "Gengar",
                 "Gengar",
                 70,
                 ExpType.MEDIUMSLOW,
-                levelCalulator.calculateLevel(ExpType.MEDIUMSLOW, 70),
-                levelCalulator.calculateLevel(ExpType.MEDIUMSLOW, 71),
+                levelCalculator.calculateLevel(ExpType.MEDIUMSLOW, 70),
+                levelCalculator.calculateLevel(ExpType.MEDIUMSLOW, 71),
+                PokemonGender.FEMALE,
                 60,
                 0,
                 0,
@@ -36,8 +37,10 @@ public class Main {
                 0,
                 new ArrayList<>(
                         List.of(
-                                new Attack("Dark Pulse", 80, PokemonTypes.DARK, AttackCategory.SPECIAL),
-                                new Attack("Shadow Ball", 80, PokemonTypes.GHOST, AttackCategory.SPECIAL)
+                                new Attack("Dark Pulse", 80, PokemonTypes.DARK, AttackCategory.SPECIAL, 15, 100),
+                                new Attack("Shadow Ball", 80, PokemonTypes.GHOST, AttackCategory.SPECIAL, 15, 100),
+                                new Attack("Shadow Punch", 60, PokemonTypes.GHOST, AttackCategory.PHYSICAL, 20, Integer.MAX_VALUE / 2),
+                                new Attack("Shadow Claw", 70, PokemonTypes.GHOST, AttackCategory.PHYSICAL, 15, 100)
                         )
                 ),
                 new PokemonTypes[]{PokemonTypes.GHOST, PokemonTypes.POISON});
