@@ -1,15 +1,12 @@
 package sarah.thurnwald.logic;
 
 import sarah.thurnwald.data.Attack;
-import sarah.thurnwald.data.AttackCategory;
 import sarah.thurnwald.data.Pokemon;
 import sarah.thurnwald.data.PokemonType;
 
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 import static sarah.thurnwald.data.PokemonType.*;
 
@@ -30,23 +27,16 @@ public class BattleSimulator {
 
     }
 
-    private int calculateDamage(Pokemon attackerPokemon, Pokemon defenderPokemon, Attack attack) {
-        return (int) ((2 * attackerPokemon.getLevel() / 5 + 2) * checkAttackCategoryForAttacker(attackerPokemon, attack) * attack.getAttackDamage()) / checkAttackCategoryForDefender(defenderPokemon, attack) / 50)
-        +2) *checkSameTypeAttackBonus(attackerPokemon, attack) * Y / 10) *randomNumberForDamage()) /255;
+    public int calculateDamage(Pokemon attackerPokemon, Pokemon defenderPokemon, Attack attack) {
+        return (int) ((((((((2 * attackerPokemon.getLevel() / 5 + 2) * checkAttackCategory("attacker", attackerPokemon, attack) * attack.getAttackDamage()) / checkAttackCategory("defender", defenderPokemon, attack)) / 50) + 2) * checkSameTypeAttackBonus(attackerPokemon, attack)) * checkForTypeModifier(defenderPokemon, attack)) * randomNumberForDamage()) / 255;
     }
 
-    private int checkAttackCategoryForAttacker(Pokemon attacker, Attack attack) {
+    private int checkAttackCategory(String pokemonPlace, Pokemon pokemon, Attack attack) {
         return switch (attack.getAttackCategory()) {
-            case SPECIAL -> attacker.getCurrentSpecialAttackStat();
-            case PHYSICAL -> attacker.getCurrentAttackStat();
-            case STATUS, NONE -> 0;
-        };
-    }
-
-    private int checkAttackCategoryForDefender(Pokemon defender, Attack attack) {
-        return switch (attack.getAttackCategory()) {
-            case SPECIAL -> defender.getCurrentSpecialDefenseStat();
-            case PHYSICAL -> defender.getCurrentDefenseStat();
+            case SPECIAL ->
+                    pokemonPlace.equals("attacker") ? pokemon.getCurrentSpecialAttackStat() : pokemon.getCurrentSpecialDefenseStat();
+            case PHYSICAL ->
+                    pokemonPlace.equals("attacker") ? pokemon.getCurrentAttackStat() : pokemon.getCurrentDefenseStat();
             case STATUS, NONE -> 0;
         };
     }
@@ -59,27 +49,41 @@ public class BattleSimulator {
     }
 
     private float checkForTypeModifier(Pokemon defender, Attack attack) {
+        float firstMultiplier;
+        float secondMultiplier;
         List<PokemonType> defenderWeaknessesTypeOne = List.of(getWeaknesses(defender.getPokemonTypes().get(0)));
-        Optional<List<PokemonType>> defenderWeaknessesTypeTwo = Optional.of(List.of(getWeaknesses(defender.getPokemonTypes().get(1))));
+        firstMultiplier = calcModifier(defenderWeaknessesTypeOne, attack.getAttackType(), WEAKNESS_MULTIPLIER);
+        List<PokemonType> defenderWeaknessesTypeTwo = List.of(getWeaknesses(defender.getPokemonTypes().get(1)));
+        secondMultiplier = calcModifier(defenderWeaknessesTypeTwo, attack.getAttackType(), WEAKNESS_MULTIPLIER);
+
 
         List<PokemonType> defenderResistanceTypeOne = List.of(getResistances(defender.getPokemonTypes().get(0)));
-        Optional<List<PokemonType>> defenderResistanceTypeTwo = Optional.of(List.of(getResistances(defender.getPokemonTypes().get(1))));
+        if (firstMultiplier == 1)
+            firstMultiplier = calcModifier(defenderResistanceTypeOne, attack.getAttackType(), RESISTANCE_MULTIPLIER);
+        List<PokemonType> defenderResistanceTypeTwo = List.of(getResistances(defender.getPokemonTypes().get(1)));
+        if (secondMultiplier == 1)
+            secondMultiplier = calcModifier(defenderResistanceTypeTwo, attack.getAttackType(), RESISTANCE_MULTIPLIER);
+
 
         List<PokemonType> defenderImmunitiesTypeOne = List.of(getImmunities(defender.getPokemonTypes().get(0)));
-        Optional<List<PokemonType>> defenderImmunitiesTypeTwo = Optional.of(List.of(getImmunities(defender.getPokemonTypes().get(1))));
+        if (firstMultiplier == 1)
+            firstMultiplier = calcModifier(defenderImmunitiesTypeOne, attack.getAttackType(), IMMUNITY_MULTIPLIER);
+        List<PokemonType> defenderImmunitiesTypeTwo = List.of(getImmunities(defender.getPokemonTypes().get(1)));
+        if (secondMultiplier == 1)
+            secondMultiplier = calcModifier(defenderImmunitiesTypeTwo, attack.getAttackType(), IMMUNITY_MULTIPLIER);
 
-        return 0.f;
+        return firstMultiplier * secondMultiplier;
     }
 
-    private Optional<Float> calcModifier(List<PokemonType> modifierType, Attack attack) {
-        /* for (PokemonType pokemonType : modifierType) {
-            if (attack.getAttackType().equals(pokemonType)) return;
-        } */
-        return Optional.of(0.f);
+    private float calcModifier(List<PokemonType> modifierType, PokemonType attackType, float multiplier) {
+        for (PokemonType pokemonType : modifierType) {
+            if (attackType.equals(pokemonType)) return multiplier;
+        }
+        return 1;
     }
 
     private int randomNumberForDamage() {
-        return (int) Math.floor(Math.random() * (RANDOM_MAX - RANDOM_MIN + 1) + RANDOM_MAX);
+        return (int) (Math.random() * (RANDOM_MAX - RANDOM_MIN + 1)) + RANDOM_MIN;
     }
 
     private PokemonType[] getWeaknesses(PokemonType pokemonType) {

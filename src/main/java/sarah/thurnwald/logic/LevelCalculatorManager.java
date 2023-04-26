@@ -16,9 +16,10 @@ public class LevelCalculatorManager {
     }
 
     public int calculateLevel(ExpType expType, int level) {
-        for (Map.Entry<ExpType, LevelCalculator> calc : levelCalculators.entrySet()) {
-            if(expType.equals(calc.getKey())) return calc.getValue().calculate(level);
-        }
-        return 0;
+        return levelCalculators.entrySet().stream()
+                .filter(element -> element.getKey().equals(expType))
+                .findFirst()
+                .map(element -> element.getValue().calculate(level))
+                .orElseThrow(RuntimeException::new);
     }
 }
