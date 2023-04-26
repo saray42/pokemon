@@ -2,15 +2,28 @@ package sarah.thurnwald.logic;
 
 import org.junit.jupiter.api.Test;
 import sarah.thurnwald.data.*;
+import sarah.thurnwald.logic.levelcalculator.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ExpCalculatorTest {
 
-    LevelCalculator levelCalculator = new LevelCalculator();
+    HashMap<ExpType, LevelCalculator> levelCalculators = new HashMap<>(
+            Map.of(
+                    ExpType.ERRATIC, new CalculateErratic(),
+                    ExpType.FAST, new CalculateFast(),
+                    ExpType.MEDIUM_FAST, new CalculateMediumFast(),
+                    ExpType.MEDIUM_SLOW, new CalculateMediumSlow(),
+                    ExpType.SLOW, new CalculateSlow(),
+                    ExpType.FLUCTUATING, new CalculateFluctuating()
+            )
+    );
+    LevelCalculatorManager levelCalculator = new LevelCalculatorManager(levelCalculators);
 
     ExpCalculator expCalculator = new ExpCalculator();
 
