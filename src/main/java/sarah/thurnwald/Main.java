@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        HashMap<ExpType, LevelCalculator> levelCalculators = new HashMap<>(
+        Map<ExpType, LevelCalculator> levelCalculators = new HashMap<>(
                 Map.of(
                         ExpType.ERRATIC, new CalculateErratic(),
                         ExpType.FAST, new CalculateFast(),
