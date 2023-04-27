@@ -14,7 +14,7 @@ public class LevelCalculatorManager {
         this.levelCalculators = levelCalculators;
     }
 
-    public int calculateLevel(ExpType expType, int level) {
+    public int calculateExpForLevel(ExpType expType, int level) {
         return levelCalculators.entrySet().stream()
                 .filter(element -> element.getKey().equals(expType))
                 .findFirst()

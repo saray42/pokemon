@@ -15,6 +15,8 @@ public class Pokemon {
 
     private String customName;
 
+    private PokemonRace race;
+
     private PokemonOwnership ownership;
 
     private final String id = UUID.randomUUID().toString();
@@ -85,14 +87,15 @@ public class Pokemon {
 
     private List<PokemonType> pokemonTypes = new ArrayList<PokemonType>(2);
 
-    public Pokemon(String name, String customName, PokemonOwnership ownership, int level, ExpType expType, LevelCalculatorManager levelCalculator, int basicExp, PokemonGender gender, PokemonNature nature, Map<PokemonStats, Integer> calculatedStats, int healthStatIv, int healthStatEv, int attackStatIv, int attackStatEv, int defenseStatIv, int defenseStatEv, int specialAttackStatIv, int specialAttackStatEv, int specialDefenseStatIv, int specialDefenseStatEv, int speedStatIv, int speedStatEv, List<Attack> attacks, List<PokemonType> pokemonTypes) {
+    public Pokemon(String name, String customName, PokemonRace race, PokemonOwnership ownership, int level, ExpType expType, LevelCalculatorManager levelCalculator, int basicExp, PokemonGender gender, PokemonNature nature, Map<PokemonStats, Integer> calculatedStats, int healthStatIv, int healthStatEv, int attackStatIv, int attackStatEv, int defenseStatIv, int defenseStatEv, int specialAttackStatIv, int specialAttackStatEv, int specialDefenseStatIv, int specialDefenseStatEv, int speedStatIv, int speedStatEv, List<Attack> attacks, List<PokemonType> pokemonTypes) {
         this.name = name;
         this.customName = customName;
+        this.race = race;
         this.ownership = ownership;
         this.level = level;
         this.expType = expType;
-        this.currentExp = levelCalculator.calculateLevel(expType, level);
-        this.expForNextLevel = levelCalculator.calculateLevel(expType, level + 1);
+        this.currentExp = levelCalculator.calculateExpForLevel(expType, level);
+        this.expForNextLevel = levelCalculator.calculateExpForLevel(expType, level + 1);
         this.basicExp = basicExp;
         this.gender = gender;
         this.nature = nature;
@@ -124,20 +127,19 @@ public class Pokemon {
         this.pokemonTypes.addAll(pokemonTypes);
     }
 
-    public void setStatsAfterLevelUp(Map<PokemonStats, Integer> calculatedStats) {
-        this.maxHealthStat = calculatedStats.get(HP);
-        this.currentHealthStat = calculatedStats.get(HP);
-        this.maxAttackStat = calculatedStats.get(ATTACK);
-        this.currentAttackStat = calculatedStats.get(ATTACK);
-        this.maxDefenseStat = calculatedStats.get(DEFENSE);
-        this.currentDefenseStat = calculatedStats.get(DEFENSE);
-        this.maxSpecialAttackStat = calculatedStats.get(SPECIALATTACK);
-        this.currentSpecialAttackStat = calculatedStats.get(SPECIALATTACK);
-        this.maxSpecialDefenseStat = calculatedStats.get(SPECIALDEFENSE);
-        this.currentSpecialDefenseStat = calculatedStats.get(SPECIALDEFENSE);
-        this.maxSpeedStat = calculatedStats.get(SPEED);
-        this.currentSpeedStat = calculatedStats.get(SPEED);
-
+    public void updateStatsOnLevelUp(Map<PokemonStats, Integer> calculatedStats) {
+        maxHealthStat = calculatedStats.get(HP);
+        currentHealthStat = currentHealthStat + calculatedStats.get(HP) - maxHealthStat;
+        maxAttackStat = calculatedStats.get(ATTACK);
+        currentAttackStat = calculatedStats.get(ATTACK);
+        maxDefenseStat = calculatedStats.get(DEFENSE);
+        currentDefenseStat = calculatedStats.get(DEFENSE);
+        maxSpecialAttackStat = calculatedStats.get(SPECIALATTACK);
+        currentSpecialAttackStat = calculatedStats.get(SPECIALATTACK);
+        maxSpecialDefenseStat = calculatedStats.get(SPECIALDEFENSE);
+        currentSpecialDefenseStat = calculatedStats.get(SPECIALDEFENSE);
+        maxSpeedStat = calculatedStats.get(SPEED);
+        currentSpeedStat = calculatedStats.get(SPEED);
     }
 
     public String getName() {
@@ -154,6 +156,14 @@ public class Pokemon {
 
     public void setCustomName(String customName) {
         this.customName = customName;
+    }
+
+    public PokemonRace getRace() {
+        return race;
+    }
+
+    public void setRace(PokemonRace race) {
+        this.race = race;
     }
 
     public PokemonOwnership getOwnership() {
@@ -433,6 +443,7 @@ public class Pokemon {
         return "Pokemon{" +
                 "name='" + name + '\'' +
                 ", customName='" + customName + '\'' +
+                ", race=" + race +
                 ", ownership=" + ownership +
                 ", id='" + id + '\'' +
                 ", level=" + level +

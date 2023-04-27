@@ -1,15 +1,16 @@
 package sarah.thurnwald.logic;
 
 import sarah.thurnwald.data.PokemonNature;
-import sarah.thurnwald.data.PokemonStats;
 import sarah.thurnwald.data.PokemonStatNames;
+import sarah.thurnwald.data.PokemonStats;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static sarah.thurnwald.data.PokemonStats.*;
 import static sarah.thurnwald.data.PokemonStatNames.*;
+import static sarah.thurnwald.data.PokemonStats.HP;
+import static sarah.thurnwald.data.PokemonStats.NONE;
 
 public class StatCalculator {
     public Map<PokemonStats, Integer> calculate(List<PokemonStats> pokemonStats, Map<PokemonStats, Map<PokemonStatNames, Integer>> statNumbers, int level, PokemonNature nature) {

@@ -38,7 +38,7 @@ public class Main {
                 )
         );
 
-        Map<PokemonStats, Map<PokemonStatNames, Integer>> gengarStatsToCalculate = new HashMap<>(Map.of(
+        Map<PokemonStats, Map<PokemonStatNames, Integer>> gengarStatsToCalculate = Map.of(
                 PokemonStats.HP, Map.of(
                         PokemonStatNames.BASE, 60,
                         PokemonStatNames.IV, 0,
@@ -69,7 +69,7 @@ public class Main {
                         PokemonStatNames.IV, 0,
                         PokemonStatNames.EV, 0
                 )
-        ));
+        );
 
         LevelCalculatorManager levelCalculatorManager = new LevelCalculatorManager(levelCalculators);
 
@@ -78,6 +78,7 @@ public class Main {
         Pokemon gengar1 = new Pokemon(
                 "Gengar",
                 "Gengar",
+                PokemonRace.GENGAR,
                 PokemonOwnership.PLAYER_POKEMON,
                 70,
                 ExpType.MEDIUM_SLOW,
@@ -105,6 +106,7 @@ public class Main {
         Pokemon gengar2 = new Pokemon(
                 "Gengar",
                 "Gengar",
+                PokemonRace.GENGAR,
                 PokemonOwnership.PLAYER_POKEMON,
                 60,
                 ExpType.MEDIUM_SLOW,
