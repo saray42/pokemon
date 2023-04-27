@@ -1,5 +1,6 @@
-package sarah.thurnwald.data;
+package sarah.thurnwald.data.pokemon;
 
+import sarah.thurnwald.data.attack.Attack;
 import sarah.thurnwald.logic.LevelCalculatorManager;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static sarah.thurnwald.data.PokemonStats.*;
+import static sarah.thurnwald.data.pokemon.PokemonStats.*;
 
 public class Pokemon {
 
@@ -15,7 +16,7 @@ public class Pokemon {
 
     private String customName;
 
-    private PokemonRace race;
+    private PokemonData data;
 
     private PokemonOwnership ownership;
 
@@ -83,20 +84,20 @@ public class Pokemon {
 
     private int speedStatEv;
 
-    private List<Attack> attacks = new ArrayList<Attack>(4);
+    private List<Attack> attacks = new ArrayList<>(4);
 
-    private List<PokemonType> pokemonTypes = new ArrayList<PokemonType>(2);
+    private List<PokemonType> pokemonTypes = new ArrayList<>(2);
 
-    public Pokemon(String name, String customName, PokemonRace race, PokemonOwnership ownership, int level, ExpType expType, LevelCalculatorManager levelCalculator, int basicExp, PokemonGender gender, PokemonNature nature, Map<PokemonStats, Integer> calculatedStats, int healthStatIv, int healthStatEv, int attackStatIv, int attackStatEv, int defenseStatIv, int defenseStatEv, int specialAttackStatIv, int specialAttackStatEv, int specialDefenseStatIv, int specialDefenseStatEv, int speedStatIv, int speedStatEv, List<Attack> attacks, List<PokemonType> pokemonTypes) {
-        this.name = name;
-        this.customName = customName;
-        this.race = race;
+    public Pokemon(PokemonData data, PokemonOwnership ownership, int level, LevelCalculatorManager levelCalculator, PokemonGender gender, PokemonNature nature, Map<PokemonStats, Integer> calculatedStats, int healthStatIv, int healthStatEv, int attackStatIv, int attackStatEv, int defenseStatIv, int defenseStatEv, int specialAttackStatIv, int specialAttackStatEv, int specialDefenseStatIv, int specialDefenseStatEv, int speedStatIv, int speedStatEv, List<Attack> attacks) {
+        this.name = data.getName();
+        this.customName = data.getName();
+        this.data = data;
         this.ownership = ownership;
         this.level = level;
-        this.expType = expType;
+        this.expType = data.getExpType();
         this.currentExp = levelCalculator.calculateExpForLevel(expType, level);
         this.expForNextLevel = levelCalculator.calculateExpForLevel(expType, level + 1);
-        this.basicExp = basicExp;
+        this.basicExp = data.getBasicExp();
         this.gender = gender;
         this.nature = nature;
         this.maxHealthStat = calculatedStats.get(HP);
@@ -124,7 +125,7 @@ public class Pokemon {
         this.speedStatIv = speedStatIv;
         this.speedStatEv = speedStatEv;
         this.attacks.addAll(attacks);
-        this.pokemonTypes.addAll(pokemonTypes);
+        this.pokemonTypes.addAll(data.getPokemonTypes());
     }
 
     public void updateStatsOnLevelUp(Map<PokemonStats, Integer> calculatedStats) {
@@ -140,6 +141,41 @@ public class Pokemon {
         maxSpecialDefenseStat = calculatedStats.get(SPECIALDEFENSE);
         currentSpeedStat = calculatedStats.get(SPEED);
         maxSpeedStat = calculatedStats.get(SPEED);
+    }
+
+    public Map<PokemonStats, Map<PokemonStatNames, Integer>> getStatsToCalculate() {
+        return Map.of(
+                PokemonStats.HP, Map.of(
+                        PokemonStatNames.BASE, data.getHp(),
+                        PokemonStatNames.IV, healthStatIv,
+                        PokemonStatNames.EV, healthStatEv
+                ),
+                PokemonStats.ATTACK, Map.of(
+                        PokemonStatNames.BASE, data.getAttack(),
+                        PokemonStatNames.IV, attackStatIv,
+                        PokemonStatNames.EV, attackStatEv
+                ),
+                PokemonStats.DEFENSE, Map.of(
+                        PokemonStatNames.BASE, data.getDefense(),
+                        PokemonStatNames.IV, defenseStatIv,
+                        PokemonStatNames.EV, defenseStatEv
+                ),
+                PokemonStats.SPECIALATTACK, Map.of(
+                        PokemonStatNames.BASE, data.getSpecialAttack(),
+                        PokemonStatNames.IV, specialAttackStatIv,
+                        PokemonStatNames.EV, specialAttackStatEv
+                ),
+                PokemonStats.SPECIALDEFENSE, Map.of(
+                        PokemonStatNames.BASE, data.getSpecialDefense(),
+                        PokemonStatNames.IV, specialDefenseStatIv,
+                        PokemonStatNames.EV, specialDefenseStatEv
+                ),
+                PokemonStats.SPEED, Map.of(
+                        PokemonStatNames.BASE, data.getSpeed(),
+                        PokemonStatNames.IV, speedStatIv,
+                        PokemonStatNames.EV, speedStatEv
+                )
+        );
     }
 
     public String getName() {
@@ -158,12 +194,12 @@ public class Pokemon {
         this.customName = customName;
     }
 
-    public PokemonRace getRace() {
-        return race;
+    public PokemonData getData() {
+        return data;
     }
 
-    public void setRace(PokemonRace race) {
-        this.race = race;
+    public void setData(PokemonData data) {
+        this.data = data;
     }
 
     public PokemonOwnership getOwnership() {
@@ -443,7 +479,7 @@ public class Pokemon {
         return "Pokemon{" +
                 "name='" + name + '\'' +
                 ", customName='" + customName + '\'' +
-                ", race=" + race +
+                ", race=" + data +
                 ", ownership=" + ownership +
                 ", id='" + id + '\'' +
                 ", level=" + level +

@@ -1,6 +1,6 @@
-package sarah.thurnwald.data;
+package sarah.thurnwald.data.pokemon;
 
-import static sarah.thurnwald.data.PokemonStats.*;
+import static sarah.thurnwald.data.pokemon.PokemonStats.*;
 
 public enum PokemonNature {
     HARDY(NONE, NONE),

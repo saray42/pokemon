@@ -1,6 +1,6 @@
 package sarah.thurnwald.logic;
 
-import sarah.thurnwald.data.Pokemon;
+import sarah.thurnwald.data.pokemon.Pokemon;
 
 public class ExpCalculator {
 

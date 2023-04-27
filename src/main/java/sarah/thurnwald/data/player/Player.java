@@ -1,4 +1,6 @@
-package sarah.thurnwald.data;
+package sarah.thurnwald.data.player;
+
+import sarah.thurnwald.data.pokemon.Pokemon;
 
 import java.util.LinkedHashMap;
 import java.util.List;

@@ -1,12 +1,12 @@
 package sarah.thurnwald.logic;
 
-import sarah.thurnwald.data.Attack;
-import sarah.thurnwald.data.Pokemon;
-import sarah.thurnwald.data.PokemonType;
+import sarah.thurnwald.data.attack.Attack;
+import sarah.thurnwald.data.pokemon.Pokemon;
+import sarah.thurnwald.data.pokemon.PokemonType;
 
 import java.util.List;
 
-import static sarah.thurnwald.data.PokemonType.*;
+import static sarah.thurnwald.data.pokemon.PokemonType.*;
 
 public class DamageCalculator {
 

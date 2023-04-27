@@ -1,4 +1,6 @@
-package sarah.thurnwald.data;
+package sarah.thurnwald.data.attack;
+
+import sarah.thurnwald.data.pokemon.PokemonType;
 
 public class Attack {
     private String attackName;

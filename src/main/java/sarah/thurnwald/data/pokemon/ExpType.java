@@ -1,4 +1,4 @@
-package sarah.thurnwald.data;
+package sarah.thurnwald.data.pokemon;
 
 public enum ExpType {
     ERRATIC,

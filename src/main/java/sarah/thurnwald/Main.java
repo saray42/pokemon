@@ -1,7 +1,12 @@
 package sarah.thurnwald;
 
-import sarah.thurnwald.data.*;
+import sarah.thurnwald.data.attack.Attack;
+import sarah.thurnwald.data.attack.AttackCategory;
+import sarah.thurnwald.data.player.Bag;
+import sarah.thurnwald.data.player.Player;
+import sarah.thurnwald.data.pokemon.*;
 import sarah.thurnwald.logic.LevelCalculatorManager;
+import sarah.thurnwald.logic.LevelUpChecker;
 import sarah.thurnwald.logic.StatCalculator;
 import sarah.thurnwald.logic.levelcalculator.*;
 
@@ -32,40 +37,73 @@ public class Main {
                 )
         );
 
-        List<PokemonType> gengarTypes = new ArrayList<>(
+        List<Attack> lilyAttacks = new ArrayList<>(
                 List.of(
-                        PokemonType.GHOST, PokemonType.POISON
+                        new Attack("Judgment", 100, PokemonType.NORMAL, AttackCategory.SPECIAL, 15, 100)
                 )
         );
 
-        Map<PokemonStats, Map<PokemonStatNames, Integer>> gengarStatsToCalculate = Map.of(
+        Map<PokemonStats, Map<PokemonStatNames, Integer>> gengarStats = Map.of(
                 PokemonStats.HP, Map.of(
-                        PokemonStatNames.BASE, 60,
+                        PokemonStatNames.BASE, PokemonData.GENGAR.getHp(),
                         PokemonStatNames.IV, 0,
                         PokemonStatNames.EV, 0
                 ),
                 PokemonStats.ATTACK, Map.of(
-                        PokemonStatNames.BASE, 65,
+                        PokemonStatNames.BASE, PokemonData.GENGAR.getAttack(),
                         PokemonStatNames.IV, 0,
                         PokemonStatNames.EV, 0
                 ),
                 PokemonStats.DEFENSE, Map.of(
-                        PokemonStatNames.BASE, 60,
+                        PokemonStatNames.BASE, PokemonData.GENGAR.getDefense(),
                         PokemonStatNames.IV, 0,
                         PokemonStatNames.EV, 0
                 ),
                 PokemonStats.SPECIALATTACK, Map.of(
-                        PokemonStatNames.BASE, 130,
+                        PokemonStatNames.BASE, PokemonData.GENGAR.getSpecialAttack(),
                         PokemonStatNames.IV, 0,
                         PokemonStatNames.EV, 0
                 ),
                 PokemonStats.SPECIALDEFENSE, Map.of(
-                        PokemonStatNames.BASE, 75,
+                        PokemonStatNames.BASE, PokemonData.GENGAR.getSpecialDefense(),
                         PokemonStatNames.IV, 0,
                         PokemonStatNames.EV, 0
                 ),
                 PokemonStats.SPEED, Map.of(
-                        PokemonStatNames.BASE, 110,
+                        PokemonStatNames.BASE, PokemonData.GENGAR.getSpeed(),
+                        PokemonStatNames.IV, 0,
+                        PokemonStatNames.EV, 0
+                )
+        );
+
+        Map<PokemonStats, Map<PokemonStatNames, Integer>> lilyStats = Map.of(
+                PokemonStats.HP, Map.of(
+                        PokemonStatNames.BASE, PokemonData.LILY.getHp(),
+                        PokemonStatNames.IV, 0,
+                        PokemonStatNames.EV, 0
+                ),
+                PokemonStats.ATTACK, Map.of(
+                        PokemonStatNames.BASE, PokemonData.LILY.getAttack(),
+                        PokemonStatNames.IV, 0,
+                        PokemonStatNames.EV, 0
+                ),
+                PokemonStats.DEFENSE, Map.of(
+                        PokemonStatNames.BASE, PokemonData.LILY.getDefense(),
+                        PokemonStatNames.IV, 0,
+                        PokemonStatNames.EV, 0
+                ),
+                PokemonStats.SPECIALATTACK, Map.of(
+                        PokemonStatNames.BASE, PokemonData.LILY.getSpecialAttack(),
+                        PokemonStatNames.IV, 0,
+                        PokemonStatNames.EV, 0
+                ),
+                PokemonStats.SPECIALDEFENSE, Map.of(
+                        PokemonStatNames.BASE, PokemonData.LILY.getSpecialDefense(),
+                        PokemonStatNames.IV, 0,
+                        PokemonStatNames.EV, 0
+                ),
+                PokemonStats.SPEED, Map.of(
+                        PokemonStatNames.BASE, PokemonData.LILY.getSpeed(),
                         PokemonStatNames.IV, 0,
                         PokemonStatNames.EV, 0
                 )
@@ -75,18 +113,16 @@ public class Main {
 
         StatCalculator statCalculator = new StatCalculator();
 
+        LevelUpChecker levelUpChecker = new LevelUpChecker();
+
         Pokemon gengar1 = new Pokemon(
-                "Gengar",
-                "Gengar",
-                PokemonRace.GENGAR,
+                PokemonData.GENGAR,
                 PokemonOwnership.PLAYER_POKEMON,
                 70,
-                ExpType.MEDIUM_SLOW,
                 levelCalculatorManager,
-                250,
                 PokemonGender.FEMALE,
                 PokemonNature.MILD,
-                statCalculator.calculate(List.of(PokemonStats.values()), gengarStatsToCalculate, 70, PokemonNature.MILD),
+                statCalculator.calculate(List.of(PokemonStats.values()), gengarStats, 70, PokemonNature.MILD),
                 0,
                 0,
                 0,
@@ -99,22 +135,17 @@ public class Main {
                 0,
                 0,
                 0,
-                gengarAttacks,
-                gengarTypes
+                gengarAttacks
         );
 
-        Pokemon gengar2 = new Pokemon(
-                "Gengar",
-                "Gengar",
-                PokemonRace.GENGAR,
+        Pokemon lily = new Pokemon(
+                PokemonData.LILY,
                 PokemonOwnership.PLAYER_POKEMON,
-                60,
-                ExpType.MEDIUM_SLOW,
+                100,
                 levelCalculatorManager,
-                250,
                 PokemonGender.FEMALE,
-                PokemonNature.MILD,
-                statCalculator.calculate(List.of(PokemonStats.values()), gengarStatsToCalculate, 70, PokemonNature.MILD),
+                PokemonNature.QUIRKY,
+                statCalculator.calculate(List.of(PokemonStats.values()), lilyStats, 100, PokemonNature.QUIRKY),
                 0,
                 0,
                 0,
@@ -127,12 +158,13 @@ public class Main {
                 0,
                 0,
                 0,
-                gengarAttacks,
-                gengarTypes
+                lilyAttacks
         );
 
-        Player lily = new Player("Lily", new Bag(), new ArrayList<>(List.of(gengar1, gengar2)), 100_000);
+        Player sarah = new Player("Sarah", new Bag(), new ArrayList<>(List.of(lily)), 100_000);
 
-        System.out.println(lily);
+        levelUpChecker.checkIfEligible(sarah.getParty().get(lily.getId()), levelCalculatorManager, statCalculator);
+
+        System.out.println(sarah);
     }
 }

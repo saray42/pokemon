@@ -1,4 +1,4 @@
-package sarah.thurnwald.data;
+package sarah.thurnwald.data.player;
 
 public class Bag {
     private String person;
