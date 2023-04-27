@@ -8,9 +8,9 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BattleSimulatorTest {
+class DamageCalculatorTest {
 
-    BattleSimulator battleSimulator = new BattleSimulator();
+    DamageCalculator damageCalculator = new DamageCalculator();
 
     HashMap<ExpType, LevelCalculator> levelCalculators = new HashMap<>(
             Map.of(
@@ -110,6 +110,6 @@ class BattleSimulatorTest {
     );
     @Test
     void calculateDamage() {
-        assertEquals(0, battleSimulator.calculateDamage(attacker, defender, attacker.getAttacks().get(1)));
+        assertEquals(0, damageCalculator.calculate(attacker, defender, attacker.getAttacks().get(1)));
     }
 }
