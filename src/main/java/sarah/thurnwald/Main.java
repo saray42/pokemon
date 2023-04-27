@@ -4,18 +4,19 @@ import sarah.thurnwald.data.attack.Attack;
 import sarah.thurnwald.data.attack.AttackCategory;
 import sarah.thurnwald.data.player.Bag;
 import sarah.thurnwald.data.player.Player;
+import sarah.thurnwald.data.player.Pokedex;
+import sarah.thurnwald.data.player.PokedexType;
 import sarah.thurnwald.data.pokemon.*;
 import sarah.thurnwald.logic.LevelCalculatorManager;
 import sarah.thurnwald.logic.LevelUpChecker;
 import sarah.thurnwald.logic.StatCalculator;
 import sarah.thurnwald.logic.levelcalculator.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
+    //TODO: kiss lily
+    //FIXME: lily is missing
     public static void main(String[] args) {
         Map<ExpType, LevelCalculator> levelCalculators = new HashMap<>(
                 Map.of(
@@ -96,10 +97,10 @@ public class Main {
                 lilyAttacks
         );
 
-        Player sarah = new Player("Sarah", new Bag(), new ArrayList<>(List.of(lily)), 100_000);
+        Player player = new Player("Sarah", new Bag(), new Pokedex(new LinkedHashMap<>(Map.of(PokemonData.LILY, new HashMap<>(Map.of(PokedexType.SEEN, false, PokedexType.CAUGHT, false))))), new ArrayList<>(List.of(lily)), 100_000);
 
-        levelUpChecker.checkIfEligible(sarah.getParty().get(lily.getId()), levelCalculatorManager, statCalculator);
+        player.getPokedex().setPokemonCaught(lily.getData());
 
-        System.out.println(sarah);
+        System.out.println(player);
     }
 }

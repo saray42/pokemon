@@ -9,19 +9,23 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Player {
+
     private final String name;
 
     private final String id = UUID.randomUUID().toString();
 
     private final Bag bag;
 
+    private final Pokedex pokedex;
+
     private final LinkedHashMap<String, Pokemon> party;
 
     private int money;
 
-    public Player(String name, Bag bag, List<Pokemon> party, int money) {
+    public Player(String name, Bag bag, Pokedex pokedex, List<Pokemon> party, int money) {
         this.name = name;
         this.bag = bag;
+        this.pokedex = pokedex;
         this.party = party.stream().collect(Collectors.toMap(Pokemon::getId, Function.identity(), (v1, v2) -> v1, LinkedHashMap::new));
         this.money = money;
     }
@@ -62,12 +66,17 @@ public class Player {
         this.money -= moneyToRemove;
     }
 
+    public Pokedex getPokedex() {
+        return pokedex;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
                 "name='" + name + '\'' +
                 ", id='" + id + '\'' +
                 ", bag=" + bag +
+                ", pokedex=" + pokedex +
                 ", party=" + party +
                 ", money=" + money +
                 '}';
