@@ -1,11 +1,9 @@
 package sarah.thurnwald.logic;
 
 import sarah.thurnwald.data.pokemon.Pokemon;
-import sarah.thurnwald.data.pokemon.PokemonStatNames;
 import sarah.thurnwald.data.pokemon.PokemonStats;
 
 import java.util.List;
-import java.util.Map;
 
 public class LevelUpChecker {
 

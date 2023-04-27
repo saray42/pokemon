@@ -2,15 +2,16 @@ package sarah.thurnwald.data.pokemon;
 
 import java.util.List;
 
-import static sarah.thurnwald.data.pokemon.ExpType.*;
+import static sarah.thurnwald.data.pokemon.ExpType.ERRATIC;
+import static sarah.thurnwald.data.pokemon.ExpType.MEDIUM_SLOW;
 import static sarah.thurnwald.data.pokemon.PokemonType.*;
 
 public enum PokemonData {
 
-    LILY("Lily", 999, 999, 999, 999, 999, 999, 999, ERRATIC, List.of(FAIRY, DRAGON), 9999),
-    GASTLY("Gastly", 30, 35, 30, 100, 35, 80, 25, MEDIUM_SLOW, List.of(GHOST, POISON), 62),
-    HAUNTER("Haunter", 45, 50, 45, 115, 55, 95, 40, MEDIUM_SLOW, List.of(GHOST, POISON), 142),
-    GENGAR("Gengar", 60, 65, 60, 130, 75, 110, 999, MEDIUM_SLOW, List.of(GHOST, POISON), 250);
+    LILY("Lily", 999, 999, 999, 999, 999, 999, 999, ERRATIC, List.of(FAIRY, DRAGON), 9999, 999),
+    GASTLY("Gastly", 30, 35, 30, 100, 35, 80, 25, MEDIUM_SLOW, List.of(GHOST, POISON), 62, 190),
+    HAUNTER("Haunter", 45, 50, 45, 115, 55, 95, 40, MEDIUM_SLOW, List.of(GHOST, POISON), 142, 90),
+    GENGAR("Gengar", 60, 65, 60, 130, 75, 110, 999, MEDIUM_SLOW, List.of(GHOST, POISON), 250, 45);
 
 
     private final String name;
@@ -24,8 +25,9 @@ public enum PokemonData {
     private final ExpType expType;
     private final List<PokemonType> pokemonTypes;
     private final int basicExp;
+    private final int catchRate;
 
-    PokemonData(String name, int hp, int attack, int defense, int specialAttack, int specialDefense, int speed, int evolveLevel, ExpType expType, List<PokemonType> pokemonTypes, int basicExp) {
+    PokemonData(String name, int hp, int attack, int defense, int specialAttack, int specialDefense, int speed, int evolveLevel, ExpType expType, List<PokemonType> pokemonTypes, int basicExp, int catchRate) {
         this.name = name;
         this.hp = hp;
         this.attack = attack;
@@ -37,6 +39,7 @@ public enum PokemonData {
         this.expType = expType;
         this.pokemonTypes = pokemonTypes;
         this.basicExp = basicExp;
+        this.catchRate = catchRate;
     }
 
     public int getHp() {
@@ -81,5 +84,9 @@ public enum PokemonData {
 
     public int getBasicExp() {
         return basicExp;
+    }
+
+    public int getCatchRate() {
+        return catchRate;
     }
 }

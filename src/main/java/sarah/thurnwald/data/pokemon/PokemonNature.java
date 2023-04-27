@@ -27,7 +27,8 @@ public enum PokemonNature {
     GENTLE(SPECIALDEFENSE, DEFENSE),
     SASSY(SPECIALDEFENSE, SPEED),
     CAREFUL(SPECIALDEFENSE, SPECIALATTACK),
-    QUIRKY(NONE, NONE);
+    QUIRKY(NONE, NONE),
+    CUTE(NONE, NONE);
 
     private final PokemonStats increaseStat;
 
