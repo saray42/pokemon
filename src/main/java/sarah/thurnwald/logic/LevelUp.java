@@ -45,7 +45,7 @@ public class LevelUp {
 
         if (pokemon.getCurrentExp() >= pokemon.getExpForNextLevel() && pokemon.getLevel() < 100) {
             pokemon.setLevel(pokemon.getLevel() + 1);
-            pokemon.setExpForNextLevel(levelCalculatorManager.calculateExpForLevel(pokemon.getExpType(), pokemon.getLevel()));
+            pokemon.setExpForNextLevel(levelCalculatorManager.calculateExpForLevel(pokemon.getExpType(), pokemon.getLevel() + 1));
             pokemon.updateStatsOnLevelUp(statCalculator.calculate(List.of(PokemonStats.values()), statsToCalculate, pokemon.getLevel(), pokemon.getNature()));
         }
 

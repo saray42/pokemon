@@ -128,18 +128,18 @@ public class Pokemon {
     }
 
     public void updateStatsOnLevelUp(Map<PokemonStats, Integer> calculatedStats) {
+        currentHealthStat = currentHealthStat + (calculatedStats.get(HP) - maxHealthStat);
         maxHealthStat = calculatedStats.get(HP);
-        currentHealthStat = currentHealthStat + calculatedStats.get(HP) - maxHealthStat;
-        maxAttackStat = calculatedStats.get(ATTACK);
         currentAttackStat = calculatedStats.get(ATTACK);
-        maxDefenseStat = calculatedStats.get(DEFENSE);
+        maxAttackStat = calculatedStats.get(ATTACK);
         currentDefenseStat = calculatedStats.get(DEFENSE);
-        maxSpecialAttackStat = calculatedStats.get(SPECIALATTACK);
+        maxDefenseStat = calculatedStats.get(DEFENSE);
         currentSpecialAttackStat = calculatedStats.get(SPECIALATTACK);
-        maxSpecialDefenseStat = calculatedStats.get(SPECIALDEFENSE);
+        maxSpecialAttackStat = calculatedStats.get(SPECIALATTACK);
         currentSpecialDefenseStat = calculatedStats.get(SPECIALDEFENSE);
-        maxSpeedStat = calculatedStats.get(SPEED);
+        maxSpecialDefenseStat = calculatedStats.get(SPECIALDEFENSE);
         currentSpeedStat = calculatedStats.get(SPEED);
+        maxSpeedStat = calculatedStats.get(SPEED);
     }
 
     public String getName() {

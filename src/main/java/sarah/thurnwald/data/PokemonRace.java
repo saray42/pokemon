@@ -1,7 +1,7 @@
 package sarah.thurnwald.data;
 
 public enum PokemonRace {
-    GENGAR(60, 65, 60, 130, 75, 110);
+    GENGAR(60, 65, 60, 130, 75, 110, 999);
 
     private final int hp;
     private final int attack;
@@ -9,14 +9,16 @@ public enum PokemonRace {
     private final int specialAttack;
     private final int specialDefense;
     private final int speed;
+    private final int evolveLevel;
 
-    PokemonRace(int hp, int attack, int defense, int specialAttack, int specialDefense, int speed) {
+    PokemonRace(int hp, int attack, int defense, int specialAttack, int specialDefense, int speed, int evolveLevel) {
         this.hp = hp;
         this.attack = attack;
         this.defense = defense;
         this.specialAttack = specialAttack;
         this.specialDefense = specialDefense;
         this.speed = speed;
+        this.evolveLevel = evolveLevel;
     }
 
     public int getHp() {
@@ -41,5 +43,9 @@ public enum PokemonRace {
 
     public int getSpeed() {
         return speed;
+    }
+
+    public int getEvolveLevel() {
+        return evolveLevel;
     }
 }
