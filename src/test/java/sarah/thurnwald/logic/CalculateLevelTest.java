@@ -2,12 +2,27 @@ package sarah.thurnwald.logic;
 
 import org.junit.jupiter.api.Test;
 import sarah.thurnwald.data.ExpType;
+import sarah.thurnwald.logic.levelcalculator.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculateLevelTest {
 
-    LevelCalculator levelCalculator = new LevelCalculator();
+    HashMap<ExpType, LevelCalculator> levelCalculators = new HashMap<>(
+            Map.of(
+                    ExpType.ERRATIC, new CalculateErratic(),
+                    ExpType.FAST, new CalculateFast(),
+                    ExpType.MEDIUM_FAST, new CalculateMediumFast(),
+                    ExpType.MEDIUM_SLOW, new CalculateMediumSlow(),
+                    ExpType.SLOW, new CalculateSlow(),
+                    ExpType.FLUCTUATING, new CalculateFluctuating()
+            )
+    );
+
+    LevelCalculatorManager levelCalculator = new LevelCalculatorManager(levelCalculators);
 
     @Test
     void calculateLevelErratic() {
