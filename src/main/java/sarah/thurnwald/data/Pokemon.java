@@ -4,7 +4,10 @@ import sarah.thurnwald.logic.LevelCalculatorManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+
+import static sarah.thurnwald.data.PokemonStats.*;
 
 public class Pokemon {
 
@@ -82,14 +85,7 @@ public class Pokemon {
 
     private List<PokemonType> pokemonTypes = new ArrayList<PokemonType>(2);
 
-    public Pokemon(String name, String customName, PokemonOwnership ownership, int level, ExpType expType, LevelCalculatorManager levelCalculator, int basicExp, PokemonGender gender, PokemonNature nature, int healthStat, int healthStatIv, int healthStatEv, int attackStat, int attackStatIv, int attackStatEv, int defenseStat, int defenseStatIv, int defenseStatEv, int specialAttackStat, int specialAttackStatIv, int specialAttackStatEv, int specialDefenseStat, int specialDefenseStatIv, int specialDefenseStatEv, int speedStat, int speedStatIv, int speedStatEv, List<Attack> attacks, List<PokemonType> pokemonTypes) {
-        int healthStatFormula = ((2 * healthStat + healthStatIv + healthStatEv / 4 + 100) * level) / 100 + 10;
-        int calculatedAttackStat = calculateStat("Attack", attackStat, attackStatIv, attackStatEv, level, nature);
-        int calculatedDefenseStat = calculateStat("Defense", defenseStat, defenseStatIv, defenseStatEv, level, nature);
-        int calculatedSpecialAttackStat = calculateStat("SpecialAttack", specialAttackStat, specialAttackStatIv, specialAttackStatEv, level, nature);
-        int calculatedSpecialDefenseStat = calculateStat("SpecialDefense", specialDefenseStat, specialAttackStatIv, specialDefenseStatIv, level, nature);
-        int calculatedSpeedStat = calculateStat("Speed", speedStat, speedStatIv, speedStatEv, level, nature);
-
+    public Pokemon(String name, String customName, PokemonOwnership ownership, int level, ExpType expType, LevelCalculatorManager levelCalculator, int basicExp, PokemonGender gender, PokemonNature nature, Map<PokemonStats, Integer> calculatedStats, int healthStatIv, int healthStatEv, int attackStatIv, int attackStatEv, int defenseStatIv, int defenseStatEv, int specialAttackStatIv, int specialAttackStatEv, int specialDefenseStatIv, int specialDefenseStatEv, int speedStatIv, int speedStatEv, List<Attack> attacks, List<PokemonType> pokemonTypes) {
         this.name = name;
         this.customName = customName;
         this.ownership = ownership;
@@ -100,42 +96,48 @@ public class Pokemon {
         this.basicExp = basicExp;
         this.gender = gender;
         this.nature = nature;
-        this.maxHealthStat = healthStatFormula;
-        this.currentHealthStat = healthStatFormula;
+        this.maxHealthStat = calculatedStats.get(HP);
+        this.currentHealthStat = calculatedStats.get(HP);
         this.healthStatIv = healthStatIv;
         this.healthStatEv = healthStatEv;
-        this.maxAttackStat = calculatedAttackStat;
-        this.currentAttackStat = calculatedAttackStat;
+        this.maxAttackStat = calculatedStats.get(ATTACK);
+        this.currentAttackStat = calculatedStats.get(ATTACK);
         this.attackStatIv = attackStatIv;
         this.attackStatEv = attackStatEv;
-        this.maxDefenseStat = calculatedDefenseStat;
-        this.currentDefenseStat = calculatedDefenseStat;
+        this.maxDefenseStat = calculatedStats.get(DEFENSE);
+        this.currentDefenseStat = calculatedStats.get(DEFENSE);
         this.defenseStatIv = defenseStatIv;
         this.defenseStatEv = defenseStatEv;
-        this.maxSpecialAttackStat = calculatedSpecialAttackStat;
-        this.currentSpecialAttackStat = calculatedSpecialAttackStat;
+        this.maxSpecialAttackStat = calculatedStats.get(SPECIALATTACK);
+        this.currentSpecialAttackStat = calculatedStats.get(SPECIALATTACK);
         this.specialAttackStatIv = specialAttackStatIv;
         this.specialAttackStatEv = specialAttackStatEv;
-        this.maxSpecialDefenseStat = calculatedSpecialDefenseStat;
-        this.currentSpecialDefenseStat = calculatedSpecialDefenseStat;
+        this.maxSpecialDefenseStat = calculatedStats.get(SPECIALDEFENSE);
+        this.currentSpecialDefenseStat = calculatedStats.get(SPECIALDEFENSE);
         this.specialDefenseStatIv = specialDefenseStatIv;
         this.specialDefenseStatEv = specialDefenseStatEv;
-        this.maxSpeedStat = calculatedSpeedStat;
-        this.currentSpeedStat = calculatedSpeedStat;
+        this.maxSpeedStat = calculatedStats.get(SPEED);
+        this.currentSpeedStat = calculatedStats.get(SPEED);
         this.speedStatIv = speedStatIv;
         this.speedStatEv = speedStatEv;
         this.attacks.addAll(attacks);
         this.pokemonTypes.addAll(pokemonTypes);
     }
 
-    private int calculateStat(String statName, int statNumber, int iv, int ev, int level, PokemonNature nature) {
-        return (int) ((((2 * statNumber + iv + ev / 4) * level) / 100 + 5) * getNatureMultiplier(statName, nature));
-    }
+    public void setStatsAfterLevelUp(Map<PokemonStats, Integer> calculatedStats) {
+        this.maxHealthStat = calculatedStats.get(HP);
+        this.currentHealthStat = calculatedStats.get(HP);
+        this.maxAttackStat = calculatedStats.get(ATTACK);
+        this.currentAttackStat = calculatedStats.get(ATTACK);
+        this.maxDefenseStat = calculatedStats.get(DEFENSE);
+        this.currentDefenseStat = calculatedStats.get(DEFENSE);
+        this.maxSpecialAttackStat = calculatedStats.get(SPECIALATTACK);
+        this.currentSpecialAttackStat = calculatedStats.get(SPECIALATTACK);
+        this.maxSpecialDefenseStat = calculatedStats.get(SPECIALDEFENSE);
+        this.currentSpecialDefenseStat = calculatedStats.get(SPECIALDEFENSE);
+        this.maxSpeedStat = calculatedStats.get(SPEED);
+        this.currentSpeedStat = calculatedStats.get(SPEED);
 
-    private float getNatureMultiplier(String statName, PokemonNature nature) {
-        if (statName.equals(nature.getIncreaseStat())) return 1.1f;
-        if (statName.equals(nature.getDecreaseStat())) return 0.9f;
-        return 1.0f;
     }
 
     public String getName() {

@@ -1,46 +1,48 @@
 package sarah.thurnwald.data;
 
+import static sarah.thurnwald.data.PokemonStats.*;
+
 public enum PokemonNature {
-    HARDY("", ""),
-    LONELY("Attack", "Defense"),
-    BRAVE("Attack", "Speed"),
-    ADAMANT("Attack", "SpecialAttack"),
-    NAUGHTY("Attack", "SpecialDefense"),
-    BOLD("Defense", "Attack"),
-    DOCILE("", ""),
-    RELAXED("Defense", "Speed"),
-    IMPISH("Defense", "SpecialAttack"),
-    LAX("Defense", "SpecialDefense"),
-    TIMID("Speed", "Attack"),
-    HASTY("Speed", "Defense"),
-    SERIOUS("", ""),
-    JOLLY("Speed", "SpecialAttack"),
-    NAIVE("Speed", "SpecialDefense"),
-    MODEST("SpecialAttack", "Attack"),
-    MILD("SpecialAttack", "Defense"),
-    QUIET("SpecialAttack", "Speed"),
-    BASHFUL("", ""),
-    RASH("SpecialAttack", "SpecialDefense"),
-    CALM("SpecialDefense", "Attack"),
-    GENTLE("SpecialDefense", "Defense"),
-    SASSY("SpecialDefense", "Speed"),
-    CAREFUL("SpecialDefense", "SpecialAttack"),
-    QUIRKY("", "");
+    HARDY(NONE, NONE),
+    LONELY(ATTACK, DEFENSE),
+    BRAVE(ATTACK, SPEED),
+    ADAMANT(ATTACK, SPECIALATTACK),
+    NAUGHTY(ATTACK, SPECIALDEFENSE),
+    BOLD(DEFENSE, ATTACK),
+    DOCILE(NONE, NONE),
+    RELAXED(DEFENSE, SPEED),
+    IMPISH(DEFENSE, SPECIALATTACK),
+    LAX(DEFENSE, SPECIALDEFENSE),
+    TIMID(SPEED, ATTACK),
+    HASTY(SPEED, DEFENSE),
+    SERIOUS(NONE, NONE),
+    JOLLY(SPEED, SPECIALATTACK),
+    NAIVE(SPEED, SPECIALDEFENSE),
+    MODEST(SPECIALATTACK, ATTACK),
+    MILD(SPECIALATTACK, DEFENSE),
+    QUIET(SPECIALATTACK, SPEED),
+    BASHFUL(NONE, NONE),
+    RASH(SPECIALATTACK, SPECIALDEFENSE),
+    CALM(SPECIALDEFENSE, ATTACK),
+    GENTLE(SPECIALDEFENSE, DEFENSE),
+    SASSY(SPECIALDEFENSE, SPEED),
+    CAREFUL(SPECIALDEFENSE, SPECIALATTACK),
+    QUIRKY(NONE, NONE);
 
-    private final String increaseStat;
+    private final PokemonStats increaseStat;
 
-    private final String decreaseStat;
+    private final PokemonStats decreaseStat;
 
-    PokemonNature(String increaseStat, String decreaseStat) {
+    PokemonNature(PokemonStats increaseStat, PokemonStats decreaseStat) {
         this.increaseStat = increaseStat;
         this.decreaseStat = decreaseStat;
     }
 
-    public String getIncreaseStat() {
+    public PokemonStats getIncreaseStat() {
         return increaseStat;
     }
 
-    public String getDecreaseStat() {
+    public PokemonStats getDecreaseStat() {
         return decreaseStat;
     }
 }

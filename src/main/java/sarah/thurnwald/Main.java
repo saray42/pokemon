@@ -2,9 +2,13 @@ package sarah.thurnwald;
 
 import sarah.thurnwald.data.*;
 import sarah.thurnwald.logic.LevelCalculatorManager;
+import sarah.thurnwald.logic.StatCalculator;
 import sarah.thurnwald.logic.levelcalculator.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,7 +27,7 @@ public class Main {
                 List.of(
                         new Attack("Dark Pulse", 80, PokemonType.DARK, AttackCategory.SPECIAL, 15, 100),
                         new Attack("Shadow Ball", 80, PokemonType.GHOST, AttackCategory.SPECIAL, 15, 100),
-                        new Attack("Shadow Punch", 60, PokemonType.GHOST, AttackCategory.PHYSICAL, 20, Integer.MAX_VALUE / 2),
+                        new Attack("Shadow Punch", 60, PokemonType.GHOST, AttackCategory.PHYSICAL, 20, -1),
                         new Attack("Shadow Claw", 70, PokemonType.GHOST, AttackCategory.PHYSICAL, 15, 100)
                 )
         );
@@ -34,9 +38,42 @@ public class Main {
                 )
         );
 
+        Map<PokemonStats, Map<PokemonStatNames, Integer>> gengarStatsToCalculate = new HashMap<>(Map.of(
+                PokemonStats.HP, Map.of(
+                        PokemonStatNames.BASE, 60,
+                        PokemonStatNames.IV, 0,
+                        PokemonStatNames.EV, 0
+                ),
+                PokemonStats.ATTACK, Map.of(
+                        PokemonStatNames.BASE, 65,
+                        PokemonStatNames.IV, 0,
+                        PokemonStatNames.EV, 0
+                ),
+                PokemonStats.DEFENSE, Map.of(
+                        PokemonStatNames.BASE, 60,
+                        PokemonStatNames.IV, 0,
+                        PokemonStatNames.EV, 0
+                ),
+                PokemonStats.SPECIALATTACK, Map.of(
+                        PokemonStatNames.BASE, 130,
+                        PokemonStatNames.IV, 0,
+                        PokemonStatNames.EV, 0
+                ),
+                PokemonStats.SPECIALDEFENSE, Map.of(
+                        PokemonStatNames.BASE, 75,
+                        PokemonStatNames.IV, 0,
+                        PokemonStatNames.EV, 0
+                ),
+                PokemonStats.SPEED, Map.of(
+                        PokemonStatNames.BASE, 110,
+                        PokemonStatNames.IV, 0,
+                        PokemonStatNames.EV, 0
+                )
+        ));
+
         LevelCalculatorManager levelCalculatorManager = new LevelCalculatorManager(levelCalculators);
 
-        Scanner scanner = new Scanner(System.in);
+        StatCalculator statCalculator = new StatCalculator();
 
         Pokemon gengar1 = new Pokemon(
                 "Gengar",
@@ -48,22 +85,17 @@ public class Main {
                 250,
                 PokemonGender.FEMALE,
                 PokemonNature.MILD,
-                60,
+                statCalculator.calculate(List.of(PokemonStats.values()), gengarStatsToCalculate, 70, PokemonNature.MILD),
                 0,
                 0,
-                65,
                 0,
                 0,
-                60,
                 0,
                 0,
-                130,
                 0,
                 0,
-                75,
                 0,
                 0,
-                110,
                 0,
                 0,
                 gengarAttacks,
@@ -80,22 +112,17 @@ public class Main {
                 250,
                 PokemonGender.FEMALE,
                 PokemonNature.MILD,
-                60,
+                statCalculator.calculate(List.of(PokemonStats.values()), gengarStatsToCalculate, 70, PokemonNature.MILD),
                 0,
                 0,
-                65,
                 0,
                 0,
-                60,
                 0,
                 0,
-                130,
                 0,
                 0,
-                75,
                 0,
                 0,
-                110,
                 0,
                 0,
                 gengarAttacks,
@@ -103,8 +130,6 @@ public class Main {
         );
 
         Player lily = new Player("Lily", new Bag(), new ArrayList<>(List.of(gengar1, gengar2)), 100_000);
-
-        lily.removePokemonFromParty(gengar2);
 
         System.out.println(lily);
     }
