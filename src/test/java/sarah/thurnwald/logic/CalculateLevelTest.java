@@ -45,6 +45,11 @@ class CalculateLevelTest {
     }
 
     @Test
+    void calculateLevelFluctuatingLvl50() {
+        assertEquals(142_500, levelCalculator.calculateLevel(ExpType.FLUCTUATING, 50));
+    }
+
+    @Test
     void calculateLevelErraticLvl2() {
         assertEquals(15, levelCalculator.calculateLevel(ExpType.ERRATIC, 2));
     }
