@@ -2,13 +2,14 @@ package sarah.thurnwald.data;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Player {
     private final String name;
 
-    private final String id;
+    private final String id = UUID.randomUUID().toString();
 
     private final Bag bag;
 
@@ -16,11 +17,10 @@ public class Player {
 
     private int money;
 
-    public Player(String name, String id, Bag bag, List<Pokemon> party, int money) {
+    public Player(String name, Bag bag, List<Pokemon> party, int money) {
         this.name = name;
-        this.id = id;
         this.bag = bag;
-        this.party = party.stream().collect(Collectors.toMap(Pokemon::getId, Function.identity(), (v1,v2)->v1, LinkedHashMap::new));
+        this.party = party.stream().collect(Collectors.toMap(Pokemon::getId, Function.identity(), (v1, v2) -> v1, LinkedHashMap::new));
         this.money = money;
     }
 

@@ -22,7 +22,28 @@ class BattleSimulatorTest {
                     ExpType.FLUCTUATING, new CalculateFluctuating()
             )
     );
-    LevelCalculatorManager levelCalculator = new LevelCalculatorManager(levelCalculators);
+
+    List<Attack> gengarAttacks = new ArrayList<>(
+            List.of(
+                    new Attack("Dark Pulse", 80, PokemonType.DARK, AttackCategory.SPECIAL, 15, 100),
+                    new Attack("Shadow Ball", 80, PokemonType.GHOST, AttackCategory.SPECIAL, 15, 100),
+                    new Attack("Shadow Punch", 60, PokemonType.GHOST, AttackCategory.PHYSICAL, 20, Integer.MAX_VALUE / 2),
+                    new Attack("Shadow Claw", 70, PokemonType.GHOST, AttackCategory.PHYSICAL, 15, 100)
+            )
+    );
+
+    List<PokemonType> gengarTypes = new ArrayList<>(
+            List.of(
+                    PokemonType.GHOST, PokemonType.POISON
+            )
+    );
+
+    List<PokemonType> immunityTest = new ArrayList<>(
+            List.of(
+                    PokemonType.NORMAL, PokemonType.POISON
+            )
+    );
+    LevelCalculatorManager levelCalculatorManager = new LevelCalculatorManager(levelCalculators);
 
     Pokemon attacker = new Pokemon(
             "Gengar",
@@ -30,8 +51,7 @@ class BattleSimulatorTest {
             PokemonOwnership.PLAYER_POKEMON,
             70,
             ExpType.MEDIUM_SLOW,
-            levelCalculator.calculateLevel(ExpType.MEDIUM_SLOW, 70),
-            levelCalculator.calculateLevel(ExpType.MEDIUM_SLOW, 71),
+            levelCalculatorManager,
             250,
             PokemonGender.FEMALE,
             PokemonNature.MILD,
@@ -53,19 +73,8 @@ class BattleSimulatorTest {
             110,
             0,
             0,
-            new ArrayList<>(
-                    List.of(
-                            new Attack("Dark Pulse", 80, PokemonType.DARK, AttackCategory.SPECIAL, 15, 100),
-                            new Attack("Shadow Ball", 80, PokemonType.GHOST, AttackCategory.SPECIAL, 15, 100),
-                            new Attack("Shadow Punch", 60, PokemonType.GHOST, AttackCategory.PHYSICAL, 20, Integer.MAX_VALUE / 2),
-                            new Attack("Shadow Claw", 70, PokemonType.GHOST, AttackCategory.PHYSICAL, 15, 100)
-                    )
-            ),
-            new ArrayList<>(
-                    List.of(
-                            PokemonType.GHOST, PokemonType.POISON
-                    )
-            )
+            gengarAttacks,
+            gengarTypes
     );
 
     Pokemon defender = new Pokemon(
@@ -74,8 +83,7 @@ class BattleSimulatorTest {
             PokemonOwnership.PLAYER_POKEMON,
             70,
             ExpType.MEDIUM_SLOW,
-            levelCalculator.calculateLevel(ExpType.MEDIUM_SLOW, 70),
-            levelCalculator.calculateLevel(ExpType.MEDIUM_SLOW, 71),
+            levelCalculatorManager,
             250,
             PokemonGender.FEMALE,
             PokemonNature.MILD,
@@ -97,22 +105,11 @@ class BattleSimulatorTest {
             110,
             0,
             0,
-            new ArrayList<>(
-                    List.of(
-                            new Attack("Dark Pulse", 80, PokemonType.DARK, AttackCategory.SPECIAL, 15, 100),
-                            new Attack("Shadow Ball", 80, PokemonType.GHOST, AttackCategory.SPECIAL, 15, 100),
-                            new Attack("Shadow Punch", 60, PokemonType.GHOST, AttackCategory.PHYSICAL, 20, Integer.MAX_VALUE / 2),
-                            new Attack("Shadow Claw", 70, PokemonType.GHOST, AttackCategory.PHYSICAL, 15, 100)
-                    )
-            ),
-            new ArrayList<>(
-                    List.of(
-                            PokemonType.GHOST, PokemonType.POISON
-                    )
-            )
+            gengarAttacks,
+            immunityTest
     );
     @Test
     void calculateDamage() {
-
+        assertEquals(0, battleSimulator.calculateDamage(attacker, defender, attacker.getAttacks().get(1)));
     }
 }

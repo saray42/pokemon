@@ -1,7 +1,8 @@
 package sarah.thurnwald.data;
 
+import sarah.thurnwald.logic.LevelCalculatorManager;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -81,7 +82,7 @@ public class Pokemon {
 
     private List<PokemonType> pokemonTypes = new ArrayList<PokemonType>(2);
 
-    public Pokemon(String name, String customName, PokemonOwnership ownership, int level, ExpType expType, int currentExp, int expForNextLevel, int basicExp, PokemonGender gender, PokemonNature nature, int healthStat, int healthStatIv, int healthStatEv, int attackStat, int attackStatIv, int attackStatEv, int defenseStat, int defenseStatIv, int defenseStatEv, int specialAttackStat, int specialAttackStatIv, int specialAttackStatEv, int specialDefenseStat, int specialDefenseStatIv, int specialDefenseStatEv, int speedStat, int speedStatIv, int speedStatEv, List<Attack> attacks, List<PokemonType> pokemonTypes) {
+    public Pokemon(String name, String customName, PokemonOwnership ownership, int level, ExpType expType, LevelCalculatorManager levelCalculator, int basicExp, PokemonGender gender, PokemonNature nature, int healthStat, int healthStatIv, int healthStatEv, int attackStat, int attackStatIv, int attackStatEv, int defenseStat, int defenseStatIv, int defenseStatEv, int specialAttackStat, int specialAttackStatIv, int specialAttackStatEv, int specialDefenseStat, int specialDefenseStatIv, int specialDefenseStatEv, int speedStat, int speedStatIv, int speedStatEv, List<Attack> attacks, List<PokemonType> pokemonTypes) {
         int healthStatFormula = ((2 * healthStat + healthStatIv + healthStatEv / 4 + 100) * level) / 100 + 10;
         int calculatedAttackStat = calculateStat("Attack", attackStat, attackStatIv, attackStatEv, level, nature);
         int calculatedDefenseStat = calculateStat("Defense", defenseStat, defenseStatIv, defenseStatEv, level, nature);
@@ -94,8 +95,8 @@ public class Pokemon {
         this.ownership = ownership;
         this.level = level;
         this.expType = expType;
-        this.currentExp = currentExp;
-        this.expForNextLevel = expForNextLevel;
+        this.currentExp = levelCalculator.calculateLevel(expType, level);
+        this.expForNextLevel = levelCalculator.calculateLevel(expType, level + 1);
         this.basicExp = basicExp;
         this.gender = gender;
         this.nature = nature;

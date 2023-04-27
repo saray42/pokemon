@@ -4,8 +4,8 @@ import sarah.thurnwald.data.Pokemon;
 
 public class ExpCalculator {
 
-    public int calculateExp(Pokemon playerPokemon, Pokemon enemyPokemon) {
-        return (int) Math.floor((double) ((enemyPokemon.getBasicExp() * enemyPokemon.getLevel()) / 5) * ((Math.pow(2 * enemyPokemon.getLevel() + 10, 2.5)) / (Math.pow(enemyPokemon.getLevel() + playerPokemon.getLevel() + 10, 2.5))) + 1);
+    public int calculateExp(Pokemon playerPokemon, Pokemon defeatedPokemon) {
+        return (int) Math.floor((double) ((defeatedPokemon.getBasicExp() * defeatedPokemon.getLevel()) / 5) * ((Math.pow(2 * defeatedPokemon.getLevel() + 10, 2.5)) / (Math.pow(defeatedPokemon.getLevel() + playerPokemon.getLevel() + 10, 2.5))) + 1);
     }
 
 }

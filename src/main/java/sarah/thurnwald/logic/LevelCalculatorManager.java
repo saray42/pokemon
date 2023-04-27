@@ -3,7 +3,6 @@ package sarah.thurnwald.logic;
 import sarah.thurnwald.data.ExpType;
 import sarah.thurnwald.logic.levelcalculator.LevelCalculator;
 
-import java.util.HashMap;
 import java.util.Map;
 
 

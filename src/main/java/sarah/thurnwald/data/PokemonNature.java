@@ -1,7 +1,5 @@
 package sarah.thurnwald.data;
 
-import java.util.List;
-
 public enum PokemonNature {
     HARDY("", ""),
     LONELY("Attack", "Defense"),

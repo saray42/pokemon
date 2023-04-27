@@ -23,7 +23,7 @@ class ExpCalculatorTest {
                     ExpType.FLUCTUATING, new CalculateFluctuating()
             )
     );
-    LevelCalculatorManager levelCalculator = new LevelCalculatorManager(levelCalculators);
+    LevelCalculatorManager levelCalculatorManager = new LevelCalculatorManager(levelCalculators);
 
     ExpCalculator expCalculator = new ExpCalculator();
 
@@ -33,8 +33,7 @@ class ExpCalculatorTest {
             PokemonOwnership.PLAYER_POKEMON,
             60,
             ExpType.MEDIUM_SLOW,
-            levelCalculator.calculateLevel(ExpType.MEDIUM_SLOW, 60),
-            levelCalculator.calculateLevel(ExpType.MEDIUM_SLOW, 61),
+            levelCalculatorManager,
             250,
             PokemonGender.FEMALE,
             PokemonNature.MILD,
@@ -77,8 +76,7 @@ class ExpCalculatorTest {
             PokemonOwnership.PLAYER_POKEMON,
             70,
             ExpType.MEDIUM_SLOW,
-            levelCalculator.calculateLevel(ExpType.MEDIUM_SLOW, 70),
-            levelCalculator.calculateLevel(ExpType.MEDIUM_SLOW, 71),
+            levelCalculatorManager,
             250,
             PokemonGender.FEMALE,
             PokemonNature.MILD,
