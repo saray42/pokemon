@@ -2,7 +2,6 @@ package sarah.thurnwald.data.player;
 
 import sarah.thurnwald.data.pokemon.PokemonData;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
