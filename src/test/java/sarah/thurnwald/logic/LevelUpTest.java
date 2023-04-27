@@ -9,11 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-class ExpCalculatorTest {
+class LevelUpTest {
 
-    ExpCalculator expCalculator = new ExpCalculator();
+    LevelUp levelUp = new LevelUp();
 
     HashMap<ExpType, LevelCalculator> levelCalculators = new HashMap<>(
             Map.of(
@@ -83,35 +83,7 @@ class ExpCalculatorTest {
 
     StatCalculator statCalculator = new StatCalculator();
 
-    Pokemon playerPokemon = new Pokemon(
-            "Gengar",
-            "Gengar",
-            PokemonRace.GENGAR,
-            PokemonOwnership.PLAYER_POKEMON,
-            70,
-            ExpType.MEDIUM_SLOW,
-            levelCalculatorManager,
-            250,
-            PokemonGender.FEMALE,
-            PokemonNature.MILD,
-            statCalculator.calculate(List.of(PokemonStats.values()), gengarStatsToCalculate, 70, PokemonNature.MILD),
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            gengarAttacks,
-            gengarTypes
-    );
-
-    Pokemon defeatedPokemon = new Pokemon(
+    Pokemon pokemonToLevelUp = new Pokemon(
             "Gengar",
             "Gengar",
             PokemonRace.GENGAR,
@@ -140,7 +112,11 @@ class ExpCalculatorTest {
     );
 
     @Test
-    void calculateExp() {
-        assertEquals(2493, expCalculator.calculateExp(playerPokemon, defeatedPokemon));
+    void checkIfEligibleForLevelUp() {
+        pokemonToLevelUp.setCurrentExp(pokemonToLevelUp.getExpForNextLevel());
+        System.out.println(pokemonToLevelUp);
+        levelUp.checkIfEligibleForLevelUp(pokemonToLevelUp, levelCalculatorManager, statCalculator);
+        System.out.println(pokemonToLevelUp);
+        assertEquals(71, pokemonToLevelUp.getLevel());
     }
 }

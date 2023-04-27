@@ -43,11 +43,47 @@ class DamageCalculatorTest {
                     PokemonType.NORMAL, PokemonType.POISON
             )
     );
+
+    Map<PokemonStats, Map<PokemonStatNames, Integer>> gengarStatsToCalculate = Map.of(
+            PokemonStats.HP, Map.of(
+                    PokemonStatNames.BASE, 60,
+                    PokemonStatNames.IV, 0,
+                    PokemonStatNames.EV, 0
+            ),
+            PokemonStats.ATTACK, Map.of(
+                    PokemonStatNames.BASE, 65,
+                    PokemonStatNames.IV, 0,
+                    PokemonStatNames.EV, 0
+            ),
+            PokemonStats.DEFENSE, Map.of(
+                    PokemonStatNames.BASE, 60,
+                    PokemonStatNames.IV, 0,
+                    PokemonStatNames.EV, 0
+            ),
+            PokemonStats.SPECIALATTACK, Map.of(
+                    PokemonStatNames.BASE, 130,
+                    PokemonStatNames.IV, 0,
+                    PokemonStatNames.EV, 0
+            ),
+            PokemonStats.SPECIALDEFENSE, Map.of(
+                    PokemonStatNames.BASE, 75,
+                    PokemonStatNames.IV, 0,
+                    PokemonStatNames.EV, 0
+            ),
+            PokemonStats.SPEED, Map.of(
+                    PokemonStatNames.BASE, 110,
+                    PokemonStatNames.IV, 0,
+                    PokemonStatNames.EV, 0
+            )
+    );
     LevelCalculatorManager levelCalculatorManager = new LevelCalculatorManager(levelCalculators);
+
+    StatCalculator statCalculator = new StatCalculator();
 
     Pokemon attacker = new Pokemon(
             "Gengar",
             "Gengar",
+            PokemonRace.GENGAR,
             PokemonOwnership.PLAYER_POKEMON,
             70,
             ExpType.MEDIUM_SLOW,
@@ -55,22 +91,17 @@ class DamageCalculatorTest {
             250,
             PokemonGender.FEMALE,
             PokemonNature.MILD,
-            60,
+            statCalculator.calculate(List.of(PokemonStats.values()), gengarStatsToCalculate, 70, PokemonNature.MILD),
             0,
             0,
-            65,
             0,
             0,
-            60,
             0,
             0,
-            130,
             0,
             0,
-            75,
             0,
             0,
-            110,
             0,
             0,
             gengarAttacks,
@@ -80,6 +111,7 @@ class DamageCalculatorTest {
     Pokemon defender = new Pokemon(
             "Gengar",
             "Gengar",
+            PokemonRace.GENGAR,
             PokemonOwnership.PLAYER_POKEMON,
             70,
             ExpType.MEDIUM_SLOW,
@@ -87,26 +119,21 @@ class DamageCalculatorTest {
             250,
             PokemonGender.FEMALE,
             PokemonNature.MILD,
-            60,
+            statCalculator.calculate(List.of(PokemonStats.values()), gengarStatsToCalculate, 70, PokemonNature.MILD),
             0,
             0,
-            65,
             0,
             0,
-            60,
             0,
             0,
-            130,
             0,
             0,
-            75,
             0,
             0,
-            110,
             0,
             0,
             gengarAttacks,
-            immunityTest
+            gengarTypes
     );
     @Test
     void calculateDamage() {
