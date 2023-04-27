@@ -14,7 +14,7 @@ import sarah.thurnwald.logic.levelcalculator.*;
 
 import java.util.*;
 
-public class Main {
+public class Application {
     //TODO: kiss lily
     //FIXME: lily is missing
     public static void main(String[] args) {
