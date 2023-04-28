@@ -99,7 +99,7 @@ public class Application {
 
         Player player = new Player("Sarah", new Bag(), new Pokedex(new LinkedHashMap<>(Map.of(PokemonData.LILY, new HashMap<>(Map.of(PokedexType.SEEN, false, PokedexType.CAUGHT, false))))), new ArrayList<>(List.of(lily)), 100_000);
 
-        player.getPokedex().setPokemonCaught(lily.getData());
+        player.getPokedex().setPokemonSeen(lily.getData());
 
         System.out.println(player);
     }

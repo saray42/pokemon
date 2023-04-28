@@ -129,7 +129,7 @@ public class Pokemon {
     }
 
     public void updateStatsOnLevelUp(Map<PokemonStats, Integer> calculatedStats) {
-        currentHealthStat = currentHealthStat + (calculatedStats.get(HP) - maxHealthStat);
+        currentHealthStat += (calculatedStats.get(HP) - maxHealthStat);
         maxHealthStat = calculatedStats.get(HP);
         currentAttackStat = calculatedStats.get(ATTACK);
         maxAttackStat = calculatedStats.get(ATTACK);
