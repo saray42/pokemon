@@ -1,6 +1,6 @@
 package sarah.thurnwald.data.pokemon;
 
-public enum PokemonStatNames {
+public enum PokemonBaseStats {
     BASE,
     IV,
     EV

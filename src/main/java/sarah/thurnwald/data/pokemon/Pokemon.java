@@ -143,37 +143,37 @@ public class Pokemon {
         maxSpeedStat = calculatedStats.get(SPEED);
     }
 
-    public Map<PokemonStats, Map<PokemonStatNames, Integer>> getStatsToCalculate() {
+    public Map<PokemonStats, Map<PokemonBaseStats, Integer>> getStatsToCalculate() {
         return Map.of(
                 PokemonStats.HP, Map.of(
-                        PokemonStatNames.BASE, data.getHp(),
-                        PokemonStatNames.IV, healthStatIv,
-                        PokemonStatNames.EV, healthStatEv
+                        PokemonBaseStats.BASE, data.getHp(),
+                        PokemonBaseStats.IV, healthStatIv,
+                        PokemonBaseStats.EV, healthStatEv
                 ),
                 PokemonStats.ATTACK, Map.of(
-                        PokemonStatNames.BASE, data.getAttack(),
-                        PokemonStatNames.IV, attackStatIv,
-                        PokemonStatNames.EV, attackStatEv
+                        PokemonBaseStats.BASE, data.getAttack(),
+                        PokemonBaseStats.IV, attackStatIv,
+                        PokemonBaseStats.EV, attackStatEv
                 ),
                 PokemonStats.DEFENSE, Map.of(
-                        PokemonStatNames.BASE, data.getDefense(),
-                        PokemonStatNames.IV, defenseStatIv,
-                        PokemonStatNames.EV, defenseStatEv
+                        PokemonBaseStats.BASE, data.getDefense(),
+                        PokemonBaseStats.IV, defenseStatIv,
+                        PokemonBaseStats.EV, defenseStatEv
                 ),
                 PokemonStats.SPECIALATTACK, Map.of(
-                        PokemonStatNames.BASE, data.getSpecialAttack(),
-                        PokemonStatNames.IV, specialAttackStatIv,
-                        PokemonStatNames.EV, specialAttackStatEv
+                        PokemonBaseStats.BASE, data.getSpecialAttack(),
+                        PokemonBaseStats.IV, specialAttackStatIv,
+                        PokemonBaseStats.EV, specialAttackStatEv
                 ),
                 PokemonStats.SPECIALDEFENSE, Map.of(
-                        PokemonStatNames.BASE, data.getSpecialDefense(),
-                        PokemonStatNames.IV, specialDefenseStatIv,
-                        PokemonStatNames.EV, specialDefenseStatEv
+                        PokemonBaseStats.BASE, data.getSpecialDefense(),
+                        PokemonBaseStats.IV, specialDefenseStatIv,
+                        PokemonBaseStats.EV, specialDefenseStatEv
                 ),
                 PokemonStats.SPEED, Map.of(
-                        PokemonStatNames.BASE, data.getSpeed(),
-                        PokemonStatNames.IV, speedStatIv,
-                        PokemonStatNames.EV, speedStatEv
+                        PokemonBaseStats.BASE, data.getSpeed(),
+                        PokemonBaseStats.IV, speedStatIv,
+                        PokemonBaseStats.EV, speedStatEv
                 )
         );
     }

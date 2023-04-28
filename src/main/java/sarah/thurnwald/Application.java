@@ -35,36 +35,36 @@ public class Application {
                 )
         );
 
-        Map<PokemonStats, Map<PokemonStatNames, Integer>> lilyStats = Map.of(
+        Map<PokemonStats, Map<PokemonBaseStats, Integer>> lilyStats = Map.of(
                 PokemonStats.HP, Map.of(
-                        PokemonStatNames.BASE, PokemonData.LILY.getHp(),
-                        PokemonStatNames.IV, 0,
-                        PokemonStatNames.EV, 0
+                        PokemonBaseStats.BASE, PokemonData.LILY.getHp(),
+                        PokemonBaseStats.IV, 0,
+                        PokemonBaseStats.EV, 0
                 ),
                 PokemonStats.ATTACK, Map.of(
-                        PokemonStatNames.BASE, PokemonData.LILY.getAttack(),
-                        PokemonStatNames.IV, 0,
-                        PokemonStatNames.EV, 0
+                        PokemonBaseStats.BASE, PokemonData.LILY.getAttack(),
+                        PokemonBaseStats.IV, 0,
+                        PokemonBaseStats.EV, 0
                 ),
                 PokemonStats.DEFENSE, Map.of(
-                        PokemonStatNames.BASE, PokemonData.LILY.getDefense(),
-                        PokemonStatNames.IV, 0,
-                        PokemonStatNames.EV, 0
+                        PokemonBaseStats.BASE, PokemonData.LILY.getDefense(),
+                        PokemonBaseStats.IV, 0,
+                        PokemonBaseStats.EV, 0
                 ),
                 PokemonStats.SPECIALATTACK, Map.of(
-                        PokemonStatNames.BASE, PokemonData.LILY.getSpecialAttack(),
-                        PokemonStatNames.IV, 0,
-                        PokemonStatNames.EV, 0
+                        PokemonBaseStats.BASE, PokemonData.LILY.getSpecialAttack(),
+                        PokemonBaseStats.IV, 0,
+                        PokemonBaseStats.EV, 0
                 ),
                 PokemonStats.SPECIALDEFENSE, Map.of(
-                        PokemonStatNames.BASE, PokemonData.LILY.getSpecialDefense(),
-                        PokemonStatNames.IV, 0,
-                        PokemonStatNames.EV, 0
+                        PokemonBaseStats.BASE, PokemonData.LILY.getSpecialDefense(),
+                        PokemonBaseStats.IV, 0,
+                        PokemonBaseStats.EV, 0
                 ),
                 PokemonStats.SPEED, Map.of(
-                        PokemonStatNames.BASE, PokemonData.LILY.getSpeed(),
-                        PokemonStatNames.IV, 0,
-                        PokemonStatNames.EV, 0
+                        PokemonBaseStats.BASE, PokemonData.LILY.getSpeed(),
+                        PokemonBaseStats.IV, 0,
+                        PokemonBaseStats.EV, 0
                 )
         );
 

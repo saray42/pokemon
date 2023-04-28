@@ -34,36 +34,36 @@ class DamageCalculatorTest {
             )
     );
 
-    Map<PokemonStats, Map<PokemonStatNames, Integer>> gengarStatsToCalculate = Map.of(
+    Map<PokemonStats, Map<PokemonBaseStats, Integer>> gengarStatsToCalculate = Map.of(
             PokemonStats.HP, Map.of(
-                    PokemonStatNames.BASE, PokemonData.GENGAR.getHp(),
-                    PokemonStatNames.IV, 0,
-                    PokemonStatNames.EV, 0
+                    PokemonBaseStats.BASE, PokemonData.GENGAR.getHp(),
+                    PokemonBaseStats.IV, 0,
+                    PokemonBaseStats.EV, 0
             ),
             PokemonStats.ATTACK, Map.of(
-                    PokemonStatNames.BASE, PokemonData.GENGAR.getAttack(),
-                    PokemonStatNames.IV, 0,
-                    PokemonStatNames.EV, 0
+                    PokemonBaseStats.BASE, PokemonData.GENGAR.getAttack(),
+                    PokemonBaseStats.IV, 0,
+                    PokemonBaseStats.EV, 0
             ),
             PokemonStats.DEFENSE, Map.of(
-                    PokemonStatNames.BASE, PokemonData.GENGAR.getDefense(),
-                    PokemonStatNames.IV, 0,
-                    PokemonStatNames.EV, 0
+                    PokemonBaseStats.BASE, PokemonData.GENGAR.getDefense(),
+                    PokemonBaseStats.IV, 0,
+                    PokemonBaseStats.EV, 0
             ),
             PokemonStats.SPECIALATTACK, Map.of(
-                    PokemonStatNames.BASE, PokemonData.GENGAR.getSpecialAttack(),
-                    PokemonStatNames.IV, 0,
-                    PokemonStatNames.EV, 0
+                    PokemonBaseStats.BASE, PokemonData.GENGAR.getSpecialAttack(),
+                    PokemonBaseStats.IV, 0,
+                    PokemonBaseStats.EV, 0
             ),
             PokemonStats.SPECIALDEFENSE, Map.of(
-                    PokemonStatNames.BASE, PokemonData.GENGAR.getSpecialDefense(),
-                    PokemonStatNames.IV, 0,
-                    PokemonStatNames.EV, 0
+                    PokemonBaseStats.BASE, PokemonData.GENGAR.getSpecialDefense(),
+                    PokemonBaseStats.IV, 0,
+                    PokemonBaseStats.EV, 0
             ),
             PokemonStats.SPEED, Map.of(
-                    PokemonStatNames.BASE, PokemonData.GENGAR.getSpeed(),
-                    PokemonStatNames.IV, 0,
-                    PokemonStatNames.EV, 0
+                    PokemonBaseStats.BASE, PokemonData.GENGAR.getSpeed(),
+                    PokemonBaseStats.IV, 0,
+                    PokemonBaseStats.EV, 0
             )
     );
 

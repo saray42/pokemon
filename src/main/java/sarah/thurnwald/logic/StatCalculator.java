@@ -1,19 +1,19 @@
 package sarah.thurnwald.logic;
 
 import sarah.thurnwald.data.pokemon.PokemonNature;
-import sarah.thurnwald.data.pokemon.PokemonStatNames;
+import sarah.thurnwald.data.pokemon.PokemonBaseStats;
 import sarah.thurnwald.data.pokemon.PokemonStats;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static sarah.thurnwald.data.pokemon.PokemonStatNames.*;
+import static sarah.thurnwald.data.pokemon.PokemonBaseStats.*;
 import static sarah.thurnwald.data.pokemon.PokemonStats.HP;
 import static sarah.thurnwald.data.pokemon.PokemonStats.NONE;
 
 public class StatCalculator {
-    public Map<PokemonStats, Integer> calculate(List<PokemonStats> pokemonStats, Map<PokemonStats, Map<PokemonStatNames, Integer>> statNumbers, int level, PokemonNature nature) {
+    public Map<PokemonStats, Integer> calculate(List<PokemonStats> pokemonStats, Map<PokemonStats, Map<PokemonBaseStats, Integer>> statNumbers, int level, PokemonNature nature) {
         HashMap<PokemonStats, Integer> calculatedStats = new HashMap<>();
 
         pokemonStats.stream().filter(pokemonStat -> !pokemonStat.equals(NONE)).forEach(pokemonStat -> {
