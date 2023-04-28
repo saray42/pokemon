@@ -1,7 +1,7 @@
 package sarah.thurnwald.logic;
 
-import sarah.thurnwald.data.pokemon.PokemonNature;
 import sarah.thurnwald.data.pokemon.PokemonBaseStats;
+import sarah.thurnwald.data.pokemon.PokemonNature;
 import sarah.thurnwald.data.pokemon.PokemonStats;
 
 import java.util.HashMap;
