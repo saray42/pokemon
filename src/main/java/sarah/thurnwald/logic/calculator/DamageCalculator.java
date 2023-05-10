@@ -3,6 +3,7 @@ package sarah.thurnwald.logic.calculator;
 import sarah.thurnwald.data.attack.Attack;
 import sarah.thurnwald.data.pokemon.Pokemon;
 import sarah.thurnwald.data.pokemon.PokemonType;
+import sarah.thurnwald.logic.generator.RandomNumberGenerator;
 
 import java.util.List;
 
@@ -20,12 +21,18 @@ public class DamageCalculator {
 
     private final int RANDOM_MIN = 217;
 
+    private final RandomNumberGenerator randomNumberGenerator;
+
+    public DamageCalculator(RandomNumberGenerator randomNumberGenerator) {
+        this.randomNumberGenerator = randomNumberGenerator;
+    }
+
     public int calculate(Pokemon attackerPokemon, Pokemon defenderPokemon, Attack attack) {
         return (int) ((((((((2 * attackerPokemon.getLevel() / 5 + 2)
                 * checkAttackCategory("attacker", attackerPokemon, attack) * attack.getAttackDamage())
                 / checkAttackCategory("defender", defenderPokemon, attack))
                 / 50) + 2) * checkSameTypeAttackBonus(attackerPokemon, attack))
-                * checkForTypeModifier(defenderPokemon, attack)) * randomNumberForDamage()) / 255;
+                * checkForTypeModifier(defenderPokemon, attack)) * randomNumberGenerator.generate(RANDOM_MIN, RANDOM_MAX)) / 255;
     }
 
     private int checkAttackCategory(String pokemonPlace, Pokemon pokemon, Attack attack) {
@@ -81,10 +88,6 @@ public class DamageCalculator {
             if (attackType.equals(pokemonType)) return multiplier;
         }
         return 1.f;
-    }
-
-    private int randomNumberForDamage() {
-        return (int) (Math.random() * (RANDOM_MAX - RANDOM_MIN + 1)) + RANDOM_MIN;
     }
 
     private List<PokemonType> getWeaknesses(PokemonType pokemonType) {

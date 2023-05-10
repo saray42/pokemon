@@ -5,32 +5,38 @@ import sarah.thurnwald.data.attack.AttackCategory;
 import sarah.thurnwald.data.player.Bag;
 import sarah.thurnwald.data.player.Player;
 import sarah.thurnwald.data.player.Pokedex;
-import sarah.thurnwald.data.player.PokedexType;
 import sarah.thurnwald.data.pokemon.*;
 import sarah.thurnwald.logic.LevelUpChecker;
 import sarah.thurnwald.logic.calculator.LevelCalculatorManager;
 import sarah.thurnwald.logic.calculator.StatCalculator;
-import sarah.thurnwald.logic.calculator.levelcalculator.*;
-import sarah.thurnwald.logic.generator.LevelCalculatorGenerator;
-import sarah.thurnwald.logic.generator.PokedexGenerator;
-import sarah.thurnwald.logic.generator.StatGenerator;
+import sarah.thurnwald.logic.calculator.levelcalculator.LevelCalculator;
+import sarah.thurnwald.logic.generator.*;
+import sarah.thurnwald.ui.OptionOutputManager;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Application {
     //TODO: kiss lily
     //FIXME: lily is missing
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
         LevelCalculatorGenerator levelCalculatorGenerator = new LevelCalculatorGenerator();
+        RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+        IvGenerator ivGenerator = new IvGenerator(randomNumberGenerator);
         PokedexGenerator pokedexGenerator = new PokedexGenerator();
         StatGenerator statGenerator = new StatGenerator();
+        OptionGenerator optionGenerator = new OptionGenerator();
+
         StatCalculator statCalculator = new StatCalculator();
         LevelUpChecker levelUpChecker = new LevelUpChecker();
         Pokedex pokedex = new Pokedex(pokedexGenerator.generate());
         Bag bag = new Bag();
 
         Map<ExpType, LevelCalculator> levelCalculators = levelCalculatorGenerator.generate();
-        Map<PokemonStats, Map<PokemonBaseStats, Integer>> lilyStats = statGenerator.generate(PokemonData.LILY);
 
         LevelCalculatorManager levelCalculatorManager = new LevelCalculatorManager(levelCalculators);
 
@@ -44,26 +50,18 @@ public class Application {
                 PokemonData.LILY,
                 PokemonOwnership.SARAH,
                 100,
-                levelCalculatorManager,
                 PokemonGender.FEMALE,
                 PokemonNature.CUTE,
-                statCalculator.calculate(List.of(PokemonStats.values()), lilyStats, 100, PokemonNature.CUTE),
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
+                levelCalculatorManager,
+                statCalculator,
+                statGenerator,
+                ivGenerator,
                 lilyAttacks
         );
 
         Player player = new Player("Sarah", bag, pokedex, new ArrayList<>(List.of(lily)), 100_000);
+
+        OptionOutputManager optionOutputManager = new OptionOutputManager(optionGenerator.generate(), player, scanner);
 
         System.out.println(player);
     }

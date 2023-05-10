@@ -3,7 +3,6 @@ package sarah.thurnwald.logic.generator;
 import sarah.thurnwald.data.player.PokedexType;
 import sarah.thurnwald.data.pokemon.PokemonData;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -13,7 +12,7 @@ public class PokedexGenerator {
 
         PokemonData[] pokemonDataArray = PokemonData.values();
         for (PokemonData pokemonData : pokemonDataArray) {
-            pokedexData.put(pokemonData, new LinkedHashMap<>(Map.of(PokedexType.SEEN, true, PokedexType.CAUGHT, false)));
+            pokedexData.put(pokemonData, new LinkedHashMap<>(Map.of(PokedexType.CAUGHT, false, PokedexType.SEEN, false)));
         }
 
         return pokedexData;

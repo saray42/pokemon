@@ -2,6 +2,9 @@ package sarah.thurnwald.data.pokemon;
 
 import sarah.thurnwald.data.attack.Attack;
 import sarah.thurnwald.logic.calculator.LevelCalculatorManager;
+import sarah.thurnwald.logic.calculator.StatCalculator;
+import sarah.thurnwald.logic.generator.IvGenerator;
+import sarah.thurnwald.logic.generator.StatGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +91,7 @@ public class Pokemon {
 
     private List<PokemonType> pokemonTypes = new ArrayList<>(2);
 
-    public Pokemon(PokemonData data, PokemonOwnership ownership, int level, LevelCalculatorManager levelCalculator, PokemonGender gender, PokemonNature nature, Map<PokemonStats, Integer> calculatedStats, int healthStatIv, int healthStatEv, int attackStatIv, int attackStatEv, int defenseStatIv, int defenseStatEv, int specialAttackStatIv, int specialAttackStatEv, int specialDefenseStatIv, int specialDefenseStatEv, int speedStatIv, int speedStatEv, List<Attack> attacks) {
+    public Pokemon(PokemonData data, PokemonOwnership ownership, int level, PokemonGender gender, PokemonNature nature, LevelCalculatorManager levelCalculator, StatCalculator statCalculator, StatGenerator statGenerator, IvGenerator ivGenerator, List<Attack> attacks) {
         this.name = data.getName();
         this.customName = data.getName();
         this.data = data;
@@ -100,32 +103,34 @@ public class Pokemon {
         this.basicExp = data.getBasicExp();
         this.gender = gender;
         this.nature = nature;
-        this.maxHealthStat = calculatedStats.get(HP);
-        this.currentHealthStat = calculatedStats.get(HP);
-        this.healthStatIv = healthStatIv;
-        this.healthStatEv = healthStatEv;
-        this.maxAttackStat = calculatedStats.get(ATTACK);
-        this.currentAttackStat = calculatedStats.get(ATTACK);
-        this.attackStatIv = attackStatIv;
-        this.attackStatEv = attackStatEv;
-        this.maxDefenseStat = calculatedStats.get(DEFENSE);
-        this.currentDefenseStat = calculatedStats.get(DEFENSE);
-        this.defenseStatIv = defenseStatIv;
-        this.defenseStatEv = defenseStatEv;
-        this.maxSpecialAttackStat = calculatedStats.get(SPECIALATTACK);
-        this.currentSpecialAttackStat = calculatedStats.get(SPECIALATTACK);
-        this.specialAttackStatIv = specialAttackStatIv;
-        this.specialAttackStatEv = specialAttackStatEv;
-        this.maxSpecialDefenseStat = calculatedStats.get(SPECIALDEFENSE);
-        this.currentSpecialDefenseStat = calculatedStats.get(SPECIALDEFENSE);
-        this.specialDefenseStatIv = specialDefenseStatIv;
-        this.specialDefenseStatEv = specialDefenseStatEv;
-        this.maxSpeedStat = calculatedStats.get(SPEED);
-        this.currentSpeedStat = calculatedStats.get(SPEED);
-        this.speedStatIv = speedStatIv;
-        this.speedStatEv = speedStatEv;
         this.attacks.addAll(attacks);
         this.pokemonTypes.addAll(data.getPokemonTypes());
+        this.healthStatEv = 0;
+        this.attackStatEv = 0;
+        this.defenseStatEv = 0;
+        this.specialAttackStatEv = 0;
+        this.specialDefenseStatEv = 0;
+        this.speedStatEv = 0;
+        this.healthStatIv = ivGenerator.generate();
+        this.attackStatIv = ivGenerator.generate();
+        this.defenseStatIv = ivGenerator.generate();
+        this.specialAttackStatIv = ivGenerator.generate();
+        this.specialDefenseStatIv = ivGenerator.generate();
+        this.speedStatIv = ivGenerator.generate();
+        Map<PokemonStats, Map<PokemonBaseStats, Integer>> lilyStats = statGenerator.generate(this, data);
+        Map<PokemonStats, Integer> calculatedStats = statCalculator.calculate(List.of(PokemonStats.values()), lilyStats, level, nature);
+        this.maxHealthStat = calculatedStats.get(HP);
+        this.currentHealthStat = calculatedStats.get(HP);
+        this.maxAttackStat = calculatedStats.get(ATTACK);
+        this.currentAttackStat = calculatedStats.get(ATTACK);
+        this.maxDefenseStat = calculatedStats.get(DEFENSE);
+        this.currentDefenseStat = calculatedStats.get(DEFENSE);
+        this.maxSpecialAttackStat = calculatedStats.get(SPECIALATTACK);
+        this.currentSpecialAttackStat = calculatedStats.get(SPECIALATTACK);
+        this.maxSpecialDefenseStat = calculatedStats.get(SPECIALDEFENSE);
+        this.currentSpecialDefenseStat = calculatedStats.get(SPECIALDEFENSE);
+        this.maxSpeedStat = calculatedStats.get(SPEED);
+        this.currentSpeedStat = calculatedStats.get(SPEED);
     }
 
     public void updateStatsOnLevelUp(Map<PokemonStats, Integer> calculatedStats) {
@@ -517,5 +522,5 @@ public class Pokemon {
                 ", pokemonTypes=" + pokemonTypes +
                 '}';
     }
-    
+
 }
