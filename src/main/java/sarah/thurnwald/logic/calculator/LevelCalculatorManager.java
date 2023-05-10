@@ -1,7 +1,7 @@
-package sarah.thurnwald.logic;
+package sarah.thurnwald.logic.calculator;
 
 import sarah.thurnwald.data.pokemon.ExpType;
-import sarah.thurnwald.logic.levelcalculator.LevelCalculator;
+import sarah.thurnwald.logic.calculator.levelcalculator.LevelCalculator;
 
 import java.util.Map;
 

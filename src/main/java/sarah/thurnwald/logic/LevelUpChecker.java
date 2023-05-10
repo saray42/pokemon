@@ -2,6 +2,8 @@ package sarah.thurnwald.logic;
 
 import sarah.thurnwald.data.pokemon.Pokemon;
 import sarah.thurnwald.data.pokemon.PokemonStats;
+import sarah.thurnwald.logic.calculator.LevelCalculatorManager;
+import sarah.thurnwald.logic.calculator.StatCalculator;
 
 import java.util.List;
 

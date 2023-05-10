@@ -2,7 +2,8 @@ package sarah.thurnwald.logic;
 
 import org.junit.jupiter.api.Test;
 import sarah.thurnwald.data.pokemon.ExpType;
-import sarah.thurnwald.logic.levelcalculator.*;
+import sarah.thurnwald.logic.calculator.LevelCalculatorManager;
+import sarah.thurnwald.logic.calculator.levelcalculator.*;
 
 import java.util.HashMap;
 import java.util.Map;

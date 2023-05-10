@@ -4,7 +4,10 @@ import org.junit.jupiter.api.Test;
 import sarah.thurnwald.data.attack.Attack;
 import sarah.thurnwald.data.attack.AttackCategory;
 import sarah.thurnwald.data.pokemon.*;
-import sarah.thurnwald.logic.levelcalculator.*;
+import sarah.thurnwald.logic.calculator.DamageCalculator;
+import sarah.thurnwald.logic.calculator.LevelCalculatorManager;
+import sarah.thurnwald.logic.calculator.StatCalculator;
+import sarah.thurnwald.logic.calculator.levelcalculator.*;
 
 import java.util.*;
 

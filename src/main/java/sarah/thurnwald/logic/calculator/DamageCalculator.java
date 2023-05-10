@@ -1,4 +1,4 @@
-package sarah.thurnwald.logic;
+package sarah.thurnwald.logic.calculator;
 
 import sarah.thurnwald.data.attack.Attack;
 import sarah.thurnwald.data.pokemon.Pokemon;

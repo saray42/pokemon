@@ -7,10 +7,13 @@ import sarah.thurnwald.data.player.Player;
 import sarah.thurnwald.data.player.Pokedex;
 import sarah.thurnwald.data.player.PokedexType;
 import sarah.thurnwald.data.pokemon.*;
-import sarah.thurnwald.logic.LevelCalculatorManager;
 import sarah.thurnwald.logic.LevelUpChecker;
-import sarah.thurnwald.logic.StatCalculator;
-import sarah.thurnwald.logic.levelcalculator.*;
+import sarah.thurnwald.logic.calculator.LevelCalculatorManager;
+import sarah.thurnwald.logic.calculator.StatCalculator;
+import sarah.thurnwald.logic.calculator.levelcalculator.*;
+import sarah.thurnwald.logic.generator.LevelCalculatorGenerator;
+import sarah.thurnwald.logic.generator.PokedexGenerator;
+import sarah.thurnwald.logic.generator.StatGenerator;
 
 import java.util.*;
 
@@ -18,61 +21,24 @@ public class Application {
     //TODO: kiss lily
     //FIXME: lily is missing
     public static void main(String[] args) {
-        Map<ExpType, LevelCalculator> levelCalculators = new HashMap<>(
-                Map.of(
-                        ExpType.ERRATIC, new CalculateErratic(),
-                        ExpType.FAST, new CalculateFast(),
-                        ExpType.MEDIUM_FAST, new CalculateMediumFast(),
-                        ExpType.MEDIUM_SLOW, new CalculateMediumSlow(),
-                        ExpType.SLOW, new CalculateSlow(),
-                        ExpType.FLUCTUATING, new CalculateFluctuating()
-                )
-        );
+        LevelCalculatorGenerator levelCalculatorGenerator = new LevelCalculatorGenerator();
+        PokedexGenerator pokedexGenerator = new PokedexGenerator();
+        StatGenerator statGenerator = new StatGenerator();
+        StatCalculator statCalculator = new StatCalculator();
+        LevelUpChecker levelUpChecker = new LevelUpChecker();
+        Pokedex pokedex = new Pokedex(pokedexGenerator.generate());
+        Bag bag = new Bag();
+
+        Map<ExpType, LevelCalculator> levelCalculators = levelCalculatorGenerator.generate();
+        Map<PokemonStats, Map<PokemonBaseStats, Integer>> lilyStats = statGenerator.generate(PokemonData.LILY);
+
+        LevelCalculatorManager levelCalculatorManager = new LevelCalculatorManager(levelCalculators);
 
         List<Attack> lilyAttacks = new ArrayList<>(
                 List.of(
                         new Attack("Judgment", 100, PokemonType.NORMAL, AttackCategory.SPECIAL, 15, 100)
                 )
         );
-
-        Map<PokemonStats, Map<PokemonBaseStats, Integer>> lilyStats = Map.of(
-                PokemonStats.HP, Map.of(
-                        PokemonBaseStats.BASE, PokemonData.LILY.getHp(),
-                        PokemonBaseStats.IV, 0,
-                        PokemonBaseStats.EV, 0
-                ),
-                PokemonStats.ATTACK, Map.of(
-                        PokemonBaseStats.BASE, PokemonData.LILY.getAttack(),
-                        PokemonBaseStats.IV, 0,
-                        PokemonBaseStats.EV, 0
-                ),
-                PokemonStats.DEFENSE, Map.of(
-                        PokemonBaseStats.BASE, PokemonData.LILY.getDefense(),
-                        PokemonBaseStats.IV, 0,
-                        PokemonBaseStats.EV, 0
-                ),
-                PokemonStats.SPECIALATTACK, Map.of(
-                        PokemonBaseStats.BASE, PokemonData.LILY.getSpecialAttack(),
-                        PokemonBaseStats.IV, 0,
-                        PokemonBaseStats.EV, 0
-                ),
-                PokemonStats.SPECIALDEFENSE, Map.of(
-                        PokemonBaseStats.BASE, PokemonData.LILY.getSpecialDefense(),
-                        PokemonBaseStats.IV, 0,
-                        PokemonBaseStats.EV, 0
-                ),
-                PokemonStats.SPEED, Map.of(
-                        PokemonBaseStats.BASE, PokemonData.LILY.getSpeed(),
-                        PokemonBaseStats.IV, 0,
-                        PokemonBaseStats.EV, 0
-                )
-        );
-
-        LevelCalculatorManager levelCalculatorManager = new LevelCalculatorManager(levelCalculators);
-
-        StatCalculator statCalculator = new StatCalculator();
-
-        LevelUpChecker levelUpChecker = new LevelUpChecker();
 
         Pokemon lily = new Pokemon(
                 PokemonData.LILY,
@@ -97,9 +63,7 @@ public class Application {
                 lilyAttacks
         );
 
-        Player player = new Player("Sarah", new Bag(), new Pokedex(new LinkedHashMap<>(Map.of(PokemonData.LILY, new HashMap<>(Map.of(PokedexType.SEEN, false, PokedexType.CAUGHT, false)), PokemonData.GASTLY, new HashMap<>(Map.of(PokedexType.SEEN, false, PokedexType.CAUGHT, false)), PokemonData.HAUNTER, new HashMap<>(Map.of(PokedexType.SEEN, false, PokedexType.CAUGHT, false)), PokemonData.GENGAR, new HashMap<>(Map.of(PokedexType.SEEN, false, PokedexType.CAUGHT, false))))), new ArrayList<>(List.of(lily)), 100_000);
-
-        player.getPokedex().setPokemonSeen(lily.getData());
+        Player player = new Player("Sarah", bag, pokedex, new ArrayList<>(List.of(lily)), 100_000);
 
         System.out.println(player);
     }

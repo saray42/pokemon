@@ -1,4 +1,4 @@
-package sarah.thurnwald.logic.levelcalculator;
+package sarah.thurnwald.logic.calculator.levelcalculator;
 
 public class CalculateMediumSlow implements LevelCalculator {
     @Override

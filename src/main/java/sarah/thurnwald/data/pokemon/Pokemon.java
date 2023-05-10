@@ -1,7 +1,7 @@
 package sarah.thurnwald.data.pokemon;
 
 import sarah.thurnwald.data.attack.Attack;
-import sarah.thurnwald.logic.LevelCalculatorManager;
+import sarah.thurnwald.logic.calculator.LevelCalculatorManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -517,4 +517,5 @@ public class Pokemon {
                 ", pokemonTypes=" + pokemonTypes +
                 '}';
     }
+    
 }
