@@ -35,9 +35,9 @@ public class Pokemon {
 
     private int basicExp;
 
-    private PokemonGender gender;
+    private final PokemonGender gender;
 
-    private PokemonNature nature;
+    private final PokemonNature nature;
 
     private int maxHealthStat;
 
@@ -117,8 +117,8 @@ public class Pokemon {
         this.specialAttackStatIv = ivGenerator.generate();
         this.specialDefenseStatIv = ivGenerator.generate();
         this.speedStatIv = ivGenerator.generate();
-        Map<PokemonStats, Map<PokemonBaseStats, Integer>> lilyStats = statGenerator.generate(this, data);
-        Map<PokemonStats, Integer> calculatedStats = statCalculator.calculate(List.of(PokemonStats.values()), lilyStats, level, nature);
+        Map<PokemonStats, Map<PokemonBaseStats, Integer>> pokemonBaseStats = statGenerator.generate(this, data);
+        Map<PokemonStats, Integer> calculatedStats = statCalculator.calculate(pokemonBaseStats, level, nature);
         this.maxHealthStat = calculatedStats.get(HP);
         this.currentHealthStat = calculatedStats.get(HP);
         this.maxAttackStat = calculatedStats.get(ATTACK);
@@ -259,16 +259,8 @@ public class Pokemon {
         return gender;
     }
 
-    public void setGender(PokemonGender gender) {
-        this.gender = gender;
-    }
-
     public PokemonNature getNature() {
         return nature;
-    }
-
-    public void setNature(PokemonNature nature) {
-        this.nature = nature;
     }
 
     public int getMaxHealthStat() {
@@ -484,7 +476,7 @@ public class Pokemon {
         return "Pokemon{" +
                 "name='" + name + '\'' +
                 ", customName='" + customName + '\'' +
-                ", race=" + data +
+                ", data=" + data +
                 ", ownership=" + ownership +
                 ", id='" + id + '\'' +
                 ", level=" + level +
@@ -522,5 +514,4 @@ public class Pokemon {
                 ", pokemonTypes=" + pokemonTypes +
                 '}';
     }
-
 }

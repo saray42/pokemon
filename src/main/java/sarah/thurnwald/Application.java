@@ -23,6 +23,7 @@ public class Application {
     //FIXME: lily is missing
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        List<PokemonStats> pokemonStats = List.of(PokemonStats.values());
 
         LevelCalculatorGenerator levelCalculatorGenerator = new LevelCalculatorGenerator();
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
@@ -31,7 +32,7 @@ public class Application {
         StatGenerator statGenerator = new StatGenerator();
         OptionGenerator optionGenerator = new OptionGenerator();
 
-        StatCalculator statCalculator = new StatCalculator();
+        StatCalculator statCalculator = new StatCalculator(pokemonStats);
         LevelUpChecker levelUpChecker = new LevelUpChecker();
         Pokedex pokedex = new Pokedex(pokedexGenerator.generate());
         Bag bag = new Bag();

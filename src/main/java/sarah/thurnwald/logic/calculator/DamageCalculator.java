@@ -4,6 +4,7 @@ import sarah.thurnwald.data.attack.Attack;
 import sarah.thurnwald.data.pokemon.Pokemon;
 import sarah.thurnwald.data.pokemon.PokemonType;
 import sarah.thurnwald.logic.generator.RandomNumberGenerator;
+import sarah.thurnwald.logic.generator.factor.PokemonFactors;
 
 import java.util.List;
 
@@ -23,8 +24,11 @@ public class DamageCalculator {
 
     private final RandomNumberGenerator randomNumberGenerator;
 
-    public DamageCalculator(RandomNumberGenerator randomNumberGenerator) {
+    private final List<PokemonFactors> pokemonFactors;
+
+    public DamageCalculator(RandomNumberGenerator randomNumberGenerator, List<PokemonFactors> pokemonFactors) {
         this.randomNumberGenerator = randomNumberGenerator;
+        this.pokemonFactors = pokemonFactors;
     }
 
     public int calculate(Pokemon attackerPokemon, Pokemon defenderPokemon, Attack attack) {

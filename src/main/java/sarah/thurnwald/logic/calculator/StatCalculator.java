@@ -13,7 +13,14 @@ import static sarah.thurnwald.data.pokemon.PokemonStats.HP;
 import static sarah.thurnwald.data.pokemon.PokemonStats.NONE;
 
 public class StatCalculator {
-    public Map<PokemonStats, Integer> calculate(List<PokemonStats> pokemonStats, Map<PokemonStats, Map<PokemonBaseStats, Integer>> statNumbers, int level, PokemonNature nature) {
+
+    private final List<PokemonStats> pokemonStats;
+
+    public StatCalculator(List<PokemonStats> pokemonStats) {
+        this.pokemonStats = pokemonStats;
+    }
+
+    public Map<PokemonStats, Integer> calculate(Map<PokemonStats, Map<PokemonBaseStats, Integer>> statNumbers, int level, PokemonNature nature) {
         HashMap<PokemonStats, Integer> calculatedStats = new HashMap<>();
 
         pokemonStats.stream().filter(pokemonStat -> !pokemonStat.equals(NONE)).forEach(pokemonStat -> {
